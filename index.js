@@ -1,27 +1,24 @@
 var venezuela = require('./venezuela.json');
 
 function Venezuela() {
-	function mapa(estados, municipios, parroquias) {
+	function mapa(callback, argumento, sub_argumento){
 		return venezuela.map(function (estado) {
-			if (estados) {
-				return estado.estado;
-			} else if (municipios) {
-				return estado.municipios.map(function (municipio) {
-					return municipio.municipio;
-				});
+			if (callback) {
+				return callback(estado, argumento, sub_argumento);	
 			} else {
-				return estado.municipios.map(function (municipio) {
-					return municipio.parroquias.map(function (parroquia) {
-						return parroquia;
-					});
-				});
+				return estado.estado;
 			}
 		});
 	}
+	function lista(array, selector, sub_selector) {
+		return array[selector].map(function (sub_array) {
+			return sub_array[sub_selector];
+		});
+	}
 	this.pais = venezuela;
-	this.estados = mapa(true);
-	this.municipios = mapa(null, true);
-	this.parroquias = mapa(null, null, true);
+	this.estados = mapa();
+	this.municipios = mapa(lista, "municipios", "municipio");
+	this.parroquias = mapa(lista, "municipios", "parroquias");
 }
 
 module.exports = new Venezuela();
