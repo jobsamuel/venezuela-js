@@ -17,9 +17,9 @@ function Venezuela() {
 	}
 
 	// Crea una lista de municipios o parroquias correspondientes a un estado.
-	function lista(array, selector, sub_selector) {
-		return array[selector].map(function (sub_array) {
-			return sub_array[sub_selector];
+	function lista(array, selector) {
+		return array.municipios.map(function (sub_array) {
+			return sub_array[selector];
 		});
 	}
 	
@@ -50,8 +50,8 @@ function Venezuela() {
 			}
 		})
 	}
-	this.municipios = mapa(lista, "municipios", "municipio");
-	this.parroquias = mapa(lista, "municipios", "parroquias");
+	this.municipios = mapa(lista, "municipio");
+	this.parroquias = mapa(lista, "parroquias");
 }
 
 module.exports = new Venezuela();
