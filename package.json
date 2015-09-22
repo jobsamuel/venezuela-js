@@ -1,0 +1,24 @@
+{
+  "name": "venezuela",
+  "version": "0.1.0",
+  "description": "Analiza, verifica, utiliza y muestra la organización territorial de Venezuela con Javascript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jobsamuel/venezuela-js.git"
+  },
+  "keywords": [
+    "venezuela",
+    "geografia",
+    "territorio"
+  ],
+  "author": "Jobsamuel Núñez <jobsamuel@gustico.com> (http://jobsamuel.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jobsamuel/venezuela-js/issues"
+  },
+  "homepage": "https://github.com/jobsamuel/venezuela-js#readme"
+}
