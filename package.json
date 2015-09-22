@@ -1,6 +1,6 @@
 {
   "name": "venezuela",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Analiza, verifica, utiliza y muestra la organización territorial de Venezuela con Javascript.",
   "main": "index.js",
   "scripts": {
