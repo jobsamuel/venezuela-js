@@ -4,12 +4,16 @@
 
 # por hacer
 
-- [ ] Reescribir la clase Venezuela
+- [x] Reescribir la clase Venezuela
+- [x] Crear las siguientes propiedades:
+    - [x] capital - retorna la capital de Venezuela.
+    - [x] estados - retorna número estados Venezolanos.
+    - [x] municipios - retorna número municipios Venezolanos.
+    - [x] parroquias - retorna número parroquias Venezolanas.
 - [ ] Crear los siguientes métodos:
-    - [ ] estados - retorna lista completa de estados Venezolanos.
-    - [ ] estado - retorna los detalles de un estado, además debe tener los siguiente sub-métodos:
-        - [ ] municipios - lista de municipios correspondiente al estado.
-        - [ ] parroquias - lista de parroquias correspondiente al estado.
+    - [ ] estado - retorna los detalles de un estado.
+    - [ ] municipio - retorna los detalles de un municipio.
+    - [ ] parroquia - retorna los detalles de un parroquia.
 - [ ] Redactar la documentación.
 
 # licencia
