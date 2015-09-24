@@ -1,57 +1,94 @@
-var venezuela = require('./venezuela.json');
+var vzla = require('./venezuela.json');
 
-function Venezuela() {
+function Venezuela () {
+	this.capital = {
+		iso_31662: vzla[23].iso_31662,
+  		estado: vzla[23].estado,
+  		capital: vzla[23].capital,
+  		municipio: vzla[23].municipios[0].municipio,
+  		parroquias: vzla[23].municipios[0].parroquias
+	};
+	this.estados = 24;
+	this.municipios = 335;
+	this.parroquias = 1139;
+}
 
-	// Retorna información sobre las entidades que conforman
-	// el territorio Venezuelano.
-	function mapa(callback, argumento, sub_argumento){
-		return venezuela.map(function (estado) {
-			if (callback) {
-				return callback(estado, argumento, sub_argumento);	
-			} else {
+// Quita acentos de las palabras.
+function formato (nombre) {
+    var r;
+    var _p = 'aeiou';
+    var _l = ['á', 'é', 'í', 'ó', 'ú'];
+    var re = function (l, p) {
+        _l.forEach(function (__l, n) {
+            if (__l === l) {
+                r = _p[n];
+            }
+        });
+        return r;
+    }
+    return nombre.toLowerCase().replace(/á|é|í|ó|ú/g, re);
+}
 
-				// Crea una lista de estados.
-				return estado.estado;
-			}
-		});
+Venezuela.prototype.estado = function (nombre, opciones) {
+	if (!nombre) {
+		return this.capital;
+	} else if (nombre && typeof nombre !== 'string') {
+		throw new Error('El nombre no puede ser ' + typeof nombre);
 	}
 
-	// Crea una lista de municipios o parroquias correspondientes a un estado.
-	function lista(array, selector) {
-		return array.municipios.map(function (sub_array) {
-			return sub_array[selector];
-		});
+	function contador (municipios) {
+	    var m = municipios.map(function (p) {
+            return p.parroquias.map(function (_p) { return _p }).length;
+        });
+		return m.reduce(function (a, b) { return a + b } );
 	}
-	
-	// Coloca en mayúscula la primera letra de cada palabra.
-	// (http://stackoverflow.com/a/196991/3366109)
-	function formato(texto)
-	{	
-	    return texto.replace(/\w\S*/g, function(txt) {
-	    	return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-	    });
-	}
-	this.pais = venezuela;
-	this.estados = mapa();
-	this.estado = function(nombre) {
 
-		// Retorna información sobre una entidad territorial específica.
-		venezuela.filter(function(entidad) {
-			var _nombre = formato(nombre);
-			if (entidad.estado == _nombre) {
-				var respuesta = {
-					iso_31662: entidad.iso_31662,
-					id_estado: entidad.id_estado,
-					estado: entidad.estado,
-					capital: entidad.capital,
-					municipios: entidad.municipios.length
-				}
-				return console.log(respuesta);
-			}
-		})
+	var resultado;
+
+	vzla.some(function (edo) {
+		var _nombre = formato(nombre);
+		var _estado = formato(edo.estado);
+		if (_estado === _nombre) {
+			resultado = {
+				iso_31662: edo.iso_31662,
+				estado: edo.estado,
+				capital: edo.capital,
+				municipios: edo.municipios.length,
+				parroquias: contador(edo.municipios)
+			};
+			return true;
+		}
+	});
+
+	return resultado || nombre + ' no es un Estado. Tal vez sea una Ciudad';
+}
+
+Venezuela.prototype.municipio = function (nombre, opciones) {
+	if (!nombre) {
+		// TODO: return municipio aleatorio de cualquier parte del país.
+		return this.capital.municipio;
+	} else if (nombre && typeof nombre !== 'string') {
+		throw new Error('El nombre no puede ser ' + typeof nombre);
 	}
-	this.municipios = mapa(lista, "municipio");
-	this.parroquias = mapa(lista, "parroquias");
+	// TODO: return información detallada del municipio indicado.
+	return vzla.map(function (m) {
+        return m.municipios.map(function (_m) { return _m.municipio });
+    });
+}
+
+Venezuela.prototype.parroquia = function (nombre, opciones) {
+	if (!nombre) {
+		// TODO: return parroquia aleatoria de cualquier parte del país.
+		return this.capital.parroquia;
+	} else if (nombre && typeof nombre !== 'string') {
+		throw new Error('El nombre no puede ser ' + typeof nombre);
+	}
+	// TODO: return información detallada de la parroquia indicada.
+	return vzla.map(function (p) {
+        return p.municipios.map(function (_p) {
+            return _p.parroquias.map(function (__p) { return __p });
+        });
+    });
 }
 
 module.exports = new Venezuela();
