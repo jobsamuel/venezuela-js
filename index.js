@@ -70,10 +70,26 @@ Venezuela.prototype.municipio = function (nombre, opciones) {
 	} else if (nombre && typeof nombre !== 'string') {
 		throw new Error('El nombre no puede ser ' + typeof nombre);
 	}
-	// TODO: return información detallada del municipio indicado.
-	return vzla.map(function (m) {
-        return m.municipios.map(function (_m) { return _m.municipio });
-    });
+
+	var resultado;
+
+	vzla.forEach(function (e) {
+		e.municipios.some(function (m) {
+			var _nombre = formato(nombre);
+			var _municipio = formato(m.municipio);
+			if (_municipio === _nombre) {
+				resultado = {
+					municipio: m.municipio,
+					capital: m.capital,
+					estado: e.estado,
+					parroquias: m.parroquias
+				};
+				return true;
+			}
+		});
+	});
+
+	return resultado || nombre + ' no es un Municipio. Tal vez sea una Parroquia';
 }
 
 Venezuela.prototype.parroquia = function (nombre, opciones) {
