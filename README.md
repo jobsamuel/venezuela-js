@@ -11,7 +11,7 @@
     - [x] municipios - retorna número municipios Venezolanos.
     - [x] parroquias - retorna número parroquias Venezolanas.
 - [ ] Crear los siguientes métodos:
-    - [ ] estado - retorna los detalles de un estado.
+    - [x] estado - retorna los detalles de un estado.
     - [ ] municipio - retorna los detalles de un municipio.
     - [ ] parroquia - retorna los detalles de un parroquia.
 - [ ] Redactar la documentación.
