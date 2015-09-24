@@ -27,5 +27,5 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
-# Tests
-test.js
+# Demo
+demo.js
