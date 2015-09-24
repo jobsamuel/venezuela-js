@@ -1,6 +1,12 @@
-# venezuela-js
+# venezuela-js [![npm version](https://badge.fury.io/js/venezuela.svg)](http://badge.fury.io/js/venezuela)
 
 > Analiza, verifica, utiliza y muestra la organización territorial de Venezuela con Javascript.
+
+# uso
+
+```bash
+$ npm install venezuela
+```
 
 # por hacer
 
