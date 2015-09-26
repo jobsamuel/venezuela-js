@@ -16,10 +16,10 @@ $ npm install venezuela
     - [x] estados - retorna número estados Venezolanos.
     - [x] municipios - retorna número municipios Venezolanos.
     - [x] parroquias - retorna número parroquias Venezolanas.
-- [ ] Crear los siguientes métodos:
+- [x] Crear los siguientes métodos:
     - [x] estado - retorna los detalles de un estado.
-    - [ ] municipio - retorna los detalles de un municipio.
-    - [ ] parroquia - retorna los detalles de un parroquia.
+    - [x] municipio - retorna los detalles de un municipio.
+    - [x] parroquia - retorna los detalles de un parroquia.
 - [ ] Redactar la documentación.
 
 # licencia
