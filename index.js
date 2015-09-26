@@ -99,12 +99,35 @@ Venezuela.prototype.parroquia = function (nombre, opciones) {
 	} else if (nombre && typeof nombre !== 'string') {
 		throw new Error('El nombre no puede ser ' + typeof nombre);
 	}
-	// TODO: return información detallada de la parroquia indicada.
-	return vzla.map(function (p) {
-        return p.municipios.map(function (_p) {
-            return _p.parroquias.map(function (__p) { return __p });
+
+	var resultados = [];
+
+    vzla.map(function (p) {
+        p.municipios.map(function (_p) {
+            return _p.parroquias.filter(function (__p) {
+            	var resultado;
+            	var _nombre = formato(nombre);
+				var _parroquia = formato(__p);
+				if (_parroquia === _nombre) {
+					resultado = {
+						parroquia: __p,
+						municipio: _p.municipio,
+						capital: _p.capital,
+						estado: p.estado
+					};
+                    resultados.push(resultado);
+                    return true;
+				}
+            });
         });
+
     });
+
+    if (!resultados[0]) {
+        return nombre + ' no es una Parroquia. Tal vez sea un Municipio.';
+    }
+
+    return resultados;
 }
 
 module.exports = new Venezuela();
