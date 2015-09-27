@@ -1,4 +1,4 @@
-# venezuela-js [![npm version](https://badge.fury.io/js/venezuela.svg)](http://badge.fury.io/js/venezuela)
+# venezuela-js [![npm version](https://badge.fury.io/js/venezuela.svg)](http://badge.fury.io/js/venezuela) [![npm](https://img.shields.io/npm/dm/venezuela.svg)]()
 
 > Analiza, verifica, utiliza y muestra la organización territorial de Venezuela con Javascript.
 
@@ -98,9 +98,9 @@ Retorna un *Arreglo* con los detalles de una o varias parroquias Venezolanas; si
     - [x] municipio - retorna los detalles de un municipio.
     - [x] parroquia - retorna los detalles de un parroquia.
 - [x] Redactar la documentación.
-- [ ] Mejorar los métodos estado y parroquia.
-    - [ ] municipio - retornar un municipio aleatorio cuando no se coloque un *nombre*.
-    - [ ] parroquia - retornar una parroquia aleatoria cuando no se coloque un *nombre*.
+- [x] Mejorar los métodos estado y parroquia.
+    - [x] municipio - retornar un municipio aleatorio cuando no se coloque un *nombre*.
+    - [x] parroquia - retornar una parroquia aleatoria cuando no se coloque un *nombre*.
 
 # licencia
 

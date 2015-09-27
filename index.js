@@ -29,6 +29,29 @@ function formato (nombre) {
     return nombre.toLowerCase().replace(/á|é|í|ó|ú/g, re);
 }
 
+function aleatorio (tipo) {
+
+    var e = vzla[Math.floor(Math.random() * (23 - 1) + 1)];
+    var m = e.municipios;
+    var _m = m[Math.floor(Math.random() * (m.length - 2) + 1)];
+    var p = _m.parroquias;
+    var _p = p[Math.floor(Math.random() * (p.length - 2) + 1)];
+    var r;
+
+    if (tipo === 'municipio') {
+        r = _m;
+        r.estado = e.estado;
+        return r;
+    } else if (tipo === 'parroquia') {
+        return {
+            parroquia: _p,
+            municipio: _m.municipio,
+            capital: _m.capital,
+            estado: e.estado
+        }
+    }
+}
+
 Venezuela.prototype.estado = function (nombre, opciones) {
 	if (!nombre) {
 		return this.capital;
@@ -65,8 +88,7 @@ Venezuela.prototype.estado = function (nombre, opciones) {
 
 Venezuela.prototype.municipio = function (nombre, opciones) {
 	if (!nombre) {
-		// TODO: return municipio aleatorio de cualquier parte del país.
-		return this.capital.municipio;
+        return aleatorio('municipio');
 	} else if (nombre && typeof nombre !== 'string') {
 		throw new Error('El nombre no puede ser ' + typeof nombre);
 	}
@@ -94,8 +116,7 @@ Venezuela.prototype.municipio = function (nombre, opciones) {
 
 Venezuela.prototype.parroquia = function (nombre, opciones) {
 	if (!nombre) {
-		// TODO: return parroquia aleatoria de cualquier parte del país.
-		return this.capital.parroquia;
+		return aleatorio('parroquia');
 	} else if (nombre && typeof nombre !== 'string') {
 		throw new Error('El nombre no puede ser ' + typeof nombre);
 	}
