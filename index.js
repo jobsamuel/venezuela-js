@@ -1,6 +1,7 @@
-var vzla = require('./venezuela.json');
+var vzla = require('./venezuela');
 
 function Venezuela () {
+    this.pais = vzla;
 	this.capital = {
 		iso_31662: vzla[23].iso_31662,
   		estado: vzla[23].estado,

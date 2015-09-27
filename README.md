@@ -51,6 +51,10 @@ El resultado será algo así
 
 # api
 
+### venezuela.pais
+
+Retorna **todos** los estados, municipios y parroquias de Venezuela.
+
 ### venezuela.capital
 
 Retorna los detalles de la capital de Venezuela.

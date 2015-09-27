@@ -1,4 +1,4 @@
-[
+module.exports = [
     {
         "iso_31662": "VE-X",
         "estado": "Amazonas",
@@ -64,7 +64,7 @@
             },
             {
                 "municipio": "Río Negro",
-                "capital": "San Carlos de Río Negro", 
+                "capital": "San Carlos de Río Negro",
                 "parroquias": [
                     "Casiquiare Curimacare",
                     "Cocuy",
@@ -740,7 +740,7 @@
                     "Barceloneta",
                     "Santa Bárbara",
                     "San Francisco"
-                ]   
+                ]
             },
             {
                 "municipio": "Caroní",
@@ -757,7 +757,7 @@
                     "Pozo Verde",
                     "Yocoima",
                     "5 de Julio"
-                ]   
+                ]
             },
             {
                 "municipio": "Cedeño",
@@ -769,14 +769,14 @@
                     "Guaniamo",
                     "La Urbana",
                     "Pijiguaos"
-                ]   
+                ]
             },
             {
                 "municipio": "El Callao",
                 "capital": "El Callao",
                 "parroquias": [
                     "El Callao"
-                ]   
+                ]
             },
             {
                 "municipio": "Gran Sabana",
@@ -784,7 +784,7 @@
                 "parroquias": [
                     "Gran Sabana",
                     "Ikabarú"
-                ]   
+                ]
             },
             {
                 "municipio": "Heres",
@@ -799,7 +799,7 @@
                     "Vista Hermosa",
                     "La Sabanita",
                     "Panapana"
-                ]   
+                ]
             },
             {
                 "municipio": "Píar",
@@ -807,7 +807,7 @@
                 "parroquias": [
                     "Andrés Eloy Blanco",
                     "Pedro Cova"
-                ]   
+                ]
             },
             {
                 "municipio": "Roscio",
@@ -815,7 +815,7 @@
                 "parroquias": [
                     "Roscio",
                     "Salóm"
-                ]   
+                ]
             },
             {
                 "municipio": "Sifontes",
@@ -824,7 +824,7 @@
                     "Sifontes",
                     "Dalla Costa",
                     "San Isidro"
-                ]   
+                ]
             },
             {
                 "municipio": "Sucre",
@@ -835,7 +835,7 @@
                     "Guarataro",
                     "Las Majadas",
                     "Moitaco"
-                ]   
+                ]
             },
             {
                 "municipio": "Padre Pedro Chien",
@@ -843,7 +843,7 @@
                 "parroquias": [
                     "Padre Pedro Chien",
                     "Río Grande"
-                ]  
+                ]
             }
         ],
         "ciudades": [
@@ -2961,10 +2961,10 @@
                 "municipio": "Junín",
                 "capital": "Rubio",
                 "parroquias": [
-                    "Junín",    
-                    "La Petrólea",  
-                    "Quinimarí",    
-                    "Bramón"   
+                    "Junín",
+                    "La Petrólea",
+                    "Quinimarí",
+                    "Bramón"
                 ]
             },
             {
@@ -3860,7 +3860,7 @@
                     "Santa Rosalía",
                     "Santa Teresa",
                     "Sucre (Catia)"
-                ]        
+                ]
             }
         ]
     }
