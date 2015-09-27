@@ -16,9 +16,11 @@ function Venezuela () {
 
 // Quita acentos de las palabras.
 function formato (nombre) {
-    var r;
-    var _p = 'aeiou';
+
     var _l = ['á', 'é', 'í', 'ó', 'ú'];
+    var _p = 'aeiou';
+    var r;
+
     var re = function (l, p) {
         _l.forEach(function (__l, n) {
             if (__l === l) {
@@ -27,6 +29,7 @@ function formato (nombre) {
         });
         return r;
     }
+
     return nombre.toLowerCase().replace(/á|é|í|ó|ú/g, re);
 }
 
@@ -84,7 +87,7 @@ Venezuela.prototype.estado = function (nombre, opciones) {
 		}
 	});
 
-	return resultado || nombre + ' no es un Estado. Tal vez sea una Ciudad';
+	return resultado || nombre + ' no es un Estado. Tal vez sea una Ciudad.';
 }
 
 Venezuela.prototype.municipio = function (nombre, opciones) {
@@ -112,7 +115,7 @@ Venezuela.prototype.municipio = function (nombre, opciones) {
 		});
 	});
 
-	return resultado || nombre + ' no es un Municipio. Tal vez sea una Parroquia';
+	return resultado || nombre + ' no es un Municipio. Tal vez sea una Parroquia.';
 }
 
 Venezuela.prototype.parroquia = function (nombre, opciones) {
