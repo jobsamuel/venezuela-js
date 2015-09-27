@@ -1,4 +1,4 @@
-# venezuela-js [![npm version](https://badge.fury.io/js/venezuela.svg)](http://badge.fury.io/js/venezuela) [![npm](https://img.shields.io/npm/dm/venezuela.svg)]()
+# venezuela-js [![npm version](https://badge.fury.io/js/venezuela.svg)](http://badge.fury.io/js/venezuela) [![npm](https://img.shields.io/npm/dt/venezuela.svg)]() [![npm](https://img.shields.io/npm/l/venezuela.svg)]()
 
 > Analiza, verifica, utiliza y muestra la organización territorial de Venezuela con Javascript.
 
@@ -73,7 +73,7 @@ Retorna el número de municipios que posee el territorio Venezolano.
 
 Retorna un *Objeto* los detalles de un municipio Venezolano.
 
-`nombre` Nombre del municipio Venezolano deseado. Debe ser un *string*.
+`nombre` Nombre *opcional* del municipio Venezolano deseado. Debe ser un *string*. De no suministrarse ningún nombre, el método retorna un municipio aleatorio.
 
 ### venezuela.parroquias
 
@@ -83,7 +83,7 @@ Retorna el número de parroquias que posee el territorio Venezolano.
 
 Retorna un *Arreglo* con los detalles de una o varias parroquias Venezolanas; si existe más de una parroquia con el mismo nombre, retorna todas las coincidencias.
 
-`nombre` Nombre de la parroquia Venezolana deseada. Debe ser un *string*.
+`nombre` Nombre *opcional* de la parroquia Venezolana deseada. Debe ser un *string*. De no suministrarse ningún nombre, el método retorna una parroquia aleatoria.
 
 # por hacer
 
