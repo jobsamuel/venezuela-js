@@ -65,8 +65,8 @@ if ((!program.args.length && program.capital) || program.args[0] === 'caracas') 
         console.log(bandera);
         console.log('');
         console.log(t1 + colors.yellow.bold(respuesta.iso_31662));
-        console.log(t2 + colors.yellow.bold(respuesta.capital));
-        console.log(t3 + colors.yellow.bold(respuesta.estado));
+        console.log(t2 + colors.yellow.bold(respuesta.estado));
+        console.log(t3 + colors.yellow.bold(respuesta.capital));
         console.log(t4 + colors.yellow.bold(respuesta.municipios));
         console.log(t5 + colors.yellow.bold(respuesta.parroquias));
         console.log('');
