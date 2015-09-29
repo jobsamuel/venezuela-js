@@ -37,7 +37,7 @@ program.on('--help', function(){
 
 if ((!program.args.length && program.capital) || program.args[0] === 'caracas') {
     respuesta = JSON.stringify(vzla.capital, null, 4);
-} else if ((!program.args.length && program.ayuda) || program.ayuda) {
+} else if (!program.args.length || program.ayuda) {
     return program.help();
 } else if (program.capital) {
     if (vzla.parroquia(program.args[0]).capital) {
