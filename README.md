@@ -1,57 +1,28 @@
-# venezuela-js [![npm version](https://badge.fury.io/js/venezuela.svg)](http://badge.fury.io/js/venezuela) [![npm](https://img.shields.io/npm/dt/venezuela.svg)]() [![npm](https://img.shields.io/npm/l/venezuela.svg)]()
+<p align="center">
+    <img alt="venezuela-js" src="http://i.imgur.com/9CNl0Af.pngg" width="auto">
+</p>
+<p align="center" style="color:#707070;">
+  Muestra la organización territorial de Venezuela.
+</p>
+<p align="center">
+  <a href="http://badge.fury.io/js/venezuela"><img alt="version" src="https://badge.fury.io/js/venezuela.svg"></a>
+  <a href="https://www.npmjs.com/package/venezuela"><img alt="descargas" src="https://img.shields.io/npm/dt/venezuela.svg"></a>
+  <a href="http://badge.fury.io/js/venezuela"><img alt="dependencias" src="https://david-dm.org/jobsamuel/venezuela-js.svg"></a>
+  <a href="https://www.npmjs.com/package/venezuela"><img alt="licencia" src="https://img.shields.io/npm/l/venezuela.svg"></a>
+</p>
 
-> Analiza, verifica, utiliza y muestra la organización territorial de Venezuela con Javascript.
-
-# instalación
-
-```bash
-$ npm install venezuela
-```
+----
 
 # uso
 
-Ejemplo.js
-```js
-var venezuela = require('venezuela');
-
-var mcbo = venezuela.municipio('Maracaibo');
-
-console.log(mcbo);
+```bash
+$ npm install -g venezuela
+$ venezuela --ayuda
 ```
 
-El resultado será algo así
+# documentación
 
-```json
-{
-  "municipio": "Maracaibo",
-  "capital": "Maracaibo",
-  "estado": "Zulia",
-  "parroquias": [
-    "Antonio Borjas Romero",
-    "Bolívar",
-    "Cacique Mara",
-    "Carracciolo Parra Pérez",
-    "Cecilio Acosta",
-    "Cristo de Aranza",
-    "Coquivacoa",
-    "Chiquinquirá",
-    "Francisco Eugenio Bustamante",
-    "Idelfonzo Vásquez",
-    "Juana de Ávila",
-    "Luis Hurtado Higuera",
-    "Manuel Dagnino",
-    "Olegario Villalobos.",
-    "Raúl Leoni",
-    "Santa Lucía",
-    "Venancio Pulgar",
-    "San Isidro"
-  ]
-}
-```
-
-# api
-
-[Documentación del API de venezuela-js](DOCUMENTACION.md)
+[Documentación del API](DOCUMENTACION.md)
 
 # licencia
 

@@ -4,8 +4,69 @@
 
 ## instalación
 
+Puedes instalar **venezuela-js** globalmente para utilizarlo en la terminal.
+
+```bash
+$ npm install -g venezuela
+```
+
+También puedes instalarlo localmente para utilizarlo sólo en tu proyecto.
+
+
 ```bash
 $ npm install venezuela
+```
+
+## uso
+
+#### global (en tu terminal)
+
+
+```bash
+$ venezuela Zulia
+```
+
+![Estado](http://i.imgur.com/LciVjJf.png)
+
+#### local
+
+Ejemplo.js
+```js
+var venezuela = require('venezuela');
+
+var mcbo = venezuela.municipio('Maracaibo');
+
+console.log(mcbo);
+```
+
+El resultado será algo así
+
+```json
+{
+  "municipio": "Maracaibo",
+  "capital": "Maracaibo",
+  "estado": "Zulia",
+  "parroquias": [
+    "Antonio Borjas Romero",
+    "Bolívar",
+    "Cacique Mara",
+    "Carracciolo Parra Pérez",
+    "Cecilio Acosta",
+    "Cristo de Aranza",
+    "Coquivacoa",
+    "Chiquinquirá",
+    "Francisco Eugenio Bustamante",
+    "Idelfonzo Vásquez",
+    "Juana de Ávila",
+    "Luis Hurtado Higuera",
+    "Manuel Dagnino",
+    "Olegario Villalobos.",
+    "Raúl Leoni",
+    "Santa Lucía",
+    "Venancio Pulgar",
+    "San Isidro"
+  ]
+}
 ```
 
 ## propiedades
@@ -147,3 +208,7 @@ El resultado será:
   }
 ]
 ```
+
+# licencia
+
+Licencia [MIT](http://opensource.org/licenses/MIT) :copyright: Jobsamuel Núñez
