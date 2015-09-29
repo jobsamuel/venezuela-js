@@ -1,6 +1,6 @@
 {
   "name": "venezuela",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Analiza, verifica, utiliza y muestra la organización territorial de Venezuela con Javascript.",
   "main": "index.js",
   "scripts": {
@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/jobsamuel/venezuela-js/issues"
   },
-  "homepage": "https://github.com/jobsamuel/venezuela-js#readme"
+  "homepage": "https://github.com/jobsamuel/venezuela-js#readme",
+  "dependencies": {
+    "commander": "^2.8.1"
+  },
+  "bin": {
+    "venezuela": "cli.js"
+  }
 }
