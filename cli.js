@@ -56,9 +56,9 @@ if ((!program.args.length && program.capital) || program.args[0] === 'caracas') 
 } else {
     if (!/Tal[ ]vez/.test(vzla.estado(program.args[0]))) {
         respuesta = vzla.estado(program.args[0])
-        t1 = colors.white.bold('    ISO 31662     ');
-        t2 = colors.white.bold('    ESTADO        ');
-        t3 = colors.white.bold('    CAPITAL       ');
+        t1 = colors.white.bold('     ISO 31662    ');
+        t2 = colors.white.bold('        ESTADO    ');
+        t3 = colors.white.bold('       CAPITAL    ');
         t4 = colors.white.bold('    MUNICIPIOS    ');
         t5 = colors.white.bold('    PARROQUIAS    ');
         console.log('');
