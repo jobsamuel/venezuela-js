@@ -1,6 +1,6 @@
 {
   "name": "venezuela",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Analiza, verifica, utiliza y muestra la organización territorial de Venezuela con Javascript.",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,11 @@
   "keywords": [
     "venezuela",
     "geografia",
-    "territorio"
+    "territorio",
+    "mapa",
+    "ciudades",
+    "municipios",
+    "parroquias"
   ],
   "author": "Jobsamuel Núñez <jobsamuel@gustico.com> (http://jobsamuel.github.io/)",
   "license": "MIT",
@@ -22,6 +26,7 @@
   },
   "homepage": "https://github.com/jobsamuel/venezuela-js#readme",
   "dependencies": {
+    "colors": "^1.1.2",
     "commander": "^2.8.1"
   },
   "bin": {
