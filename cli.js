@@ -42,12 +42,12 @@ if ((!program.args.length && program.capital) || program.args[0] === 'caracas') 
     program.help();
     return updateNotifier({pkg: pkg}).notify();
 } else if (program.capital) {
-    if (vzla.parroquia(program.args[0]).capital) {
-        respuesta = vzla.parroquia(program.args[0]).capital;
+    if (vzla.estado(program.args[0]).capital) {
+        respuesta = '    ' + vzla.estado(program.args[0]).capital;
     } else if (vzla.municipio(program.args[0]).capital) {
-        respuesta = vzla.municipio(program.args[0]).capital;
-    } else if (vzla.estado(program.args[0]).capital) {
-        respuesta = vzla.estado(program.args[0]).capital;
+        respuesta = '    ' + vzla.municipio(program.args[0]).capital;
+    } else if (vzla.parroquia(program.args[0]).capital) {
+        respuesta = '    ' + vzla.parroquia(program.args[0]).capital;
     } else {
         respuesta = program.args[0] + ' es un nombre inválido.';
     }
