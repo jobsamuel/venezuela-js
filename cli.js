@@ -2,6 +2,7 @@
 
 var vzla = require('./index');
 var pkg = require('./package.json');
+var updateNotifier = require('update-notifier');
 var program = require('commander');
 var colors = require('colors');
 var path = require('path');
@@ -38,7 +39,8 @@ program.on('--help', function(){
 if ((!program.args.length && program.capital) || program.args[0] === 'caracas') {
     respuesta = JSON.stringify(vzla.capital, null, 4);
 } else if (process.argv.length <= 2 || program.ayuda) {
-    return program.help();
+    program.help();
+    return updateNotifier({pkg: pkg}).notify();
 } else if (program.capital) {
     if (vzla.parroquia(program.args[0]).capital) {
         respuesta = vzla.parroquia(program.args[0]).capital;
@@ -85,3 +87,4 @@ console.log(bandera);
 console.log('');
 console.log(colors.white.bold(respuesta));
 console.log('');
+updateNotifier({pkg: pkg}).notify();
