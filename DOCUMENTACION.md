@@ -2,7 +2,24 @@
 
 > Documentación completa del API de venezuela-js
 
-## instalación
+# ¿por qué venezuela-js?
+
+Nunca fui bueno para aprenderme todos los Estados y Capitales de mi país, simplemente nunca los aprendí. Así que, como me encanta [Node](https://nodejs.org/en/) y las cosas simples, decidí hacer un módulo que permitiera obtener la información de un Estado, Municipio o Parroquia de Venezuela con tan sólo escribir su nombre en la terminal o un script. ¿Te gustaría utilizarlo?
+
+# índice
+
+1. [Requisitos](#requisitos)
+2. [Instalación](#instalación)
+3. [Terminal](#terminal)
+4. [API](#api)
+5. [Referencias](#refencias)
+7. [Licencia](#licencia)
+
+# requisitos
+
+Para comenzar, sólo necesitas tener [Node](https://nodejs.org/en/) y [npm](https://www.npmjs.com/) instalados.
+
+# instalación
 
 Puedes instalar **venezuela-js** globalmente para utilizarlo en la terminal.
 
@@ -10,17 +27,16 @@ Puedes instalar **venezuela-js** globalmente para utilizarlo en la terminal.
 $ npm install -g venezuela
 ```
 
-También puedes instalarlo localmente para utilizarlo sólo en tu proyecto.
+También puedes instalarlo localmente para sólo utilizarlo en tu proyecto.
 
 
 ```bash
 $ npm install venezuela
 ```
 
-## uso
+# terminal
 
-#### global (en tu terminal)
-
+Luego de haber instalado **venezuela-js** globalmente, sólo tienes que escribir en la terminal el nombre del módulo más el nombre de un Estado, Municipio o Parroquia de la cual desees información. Por ejemplo:
 
 ```bash
 $ venezuela Zulia
@@ -28,46 +44,29 @@ $ venezuela Zulia
 
 ![Estado](http://i.imgur.com/LciVjJf.png)
 
-#### local
+#### uso
 
-Ejemplo.js
-```js
-var venezuela = require('venezuela');
-
-var mcbo = venezuela.municipio('Maracaibo');
-
-console.log(mcbo);
+```bash
+$ venezuela <estado|municipio|parroquia> [opciones]
 ```
 
-El resultado será algo así
+#### opciones
 
-```json
-{
-  "municipio": "Maracaibo",
-  "capital": "Maracaibo",
-  "estado": "Zulia",
-  "parroquias": [
-    "Antonio Borjas Romero",
-    "Bolívar",
-    "Cacique Mara",
-    "Carracciolo Parra Pérez",
-    "Cecilio Acosta",
-    "Cristo de Aranza",
-    "Coquivacoa",
-    "Chiquinquirá",
-    "Francisco Eugenio Bustamante",
-    "Idelfonzo Vásquez",
-    "Juana de Ávila",
-    "Luis Hurtado Higuera",
-    "Manuel Dagnino",
-    "Olegario Villalobos.",
-    "Raúl Leoni",
-    "Santa Lucía",
-    "Venancio Pulgar",
-    "San Isidro"
-  ]
-}
+Si deseas un **resultado específico**, por ejemplo, obtener información sobre la parroquia *Libertador* en vez del municipio que lleva el mismo nombre, puedes utilizar alguna de estas opciones.
+
+```bash
+$  -V, --version               # Muestra la versión del módulo
+$  -a, --ayuda                 # Muestra cómo utilizar venezuela-js
+$  -c, --capital <nombre>      # Muesta la capital de la entidad
+$  -m, --municipio <nombre>    # Muesta información de un municipio Venezolano
+$  -p, --parroquia <nombre>    # Muesta información de una parroquia Venezolana
 ```
+
+Cabe destacar, si el parámetro **nombre** no es suministrado, se muestra un resultado aleatorio.
+
+# api
+
+A continuación se presentan las propiedades y métodos del API de **venezuela-js** para que puedas sacarle el máximo provecho en tu proyecto.
 
 ## propiedades
 
@@ -208,6 +207,10 @@ El resultado será:
   }
 ]
 ```
+
+# referencias
+
+- [venezuela-json](https://github.com/zokeber/venezuela-json)
 
 # licencia
 
