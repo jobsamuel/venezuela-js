@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 var vzla = require('./index');
+var pkg = require('./package.json');
 var program = require('commander');
 var colors = require('colors');
 var path = require('path');
-var pkg = require(path.join(__dirname, 'package.json'));
 var bandera = '    ' +
     colors.yellow.bold('• ') +
     colors.blue.bold('• ') +
@@ -21,9 +21,9 @@ program
     .usage('<estado|municipio|parroquia> [opciones]')
     .description(colors.yellow('Muestra información sobre el territorio Venezolano.'.bold))
     .option('-a, --ayuda', 'muestra cómo utilizar venezuela-js')
-    .option('-c, --capital', 'muestra la información de la capital')
-    .option('-m, --municipio', 'muestra la información de un municipio')
-    .option('-p, --parroquia', 'muestra la información de una parroquia')
+    .option('-c, --capital nombre', 'muestra la capital de la entidad')
+    .option('-m, --municipio nombre', 'muestra la información de un municipio')
+    .option('-p, --parroquia nombre', 'muestra la información de una parroquia')
     .parse(process.argv);
 
 program.on('--help', function(){
@@ -37,7 +37,7 @@ program.on('--help', function(){
 
 if ((!program.args.length && program.capital) || program.args[0] === 'caracas') {
     respuesta = JSON.stringify(vzla.capital, null, 4);
-} else if (!program.args.length || program.ayuda) {
+} else if (process.argv.length <= 2 || program.ayuda) {
     return program.help();
 } else if (program.capital) {
     if (vzla.parroquia(program.args[0]).capital) {
@@ -50,9 +50,9 @@ if ((!program.args.length && program.capital) || program.args[0] === 'caracas') 
         respuesta = program.args[0] + ' es un nombre inválido.';
     }
 } else if (program.municipio) {
-    respuesta = JSON.stringify(vzla.municipio(program.args[0]), null, 2);
+    respuesta = JSON.stringify(vzla.municipio(program.args[0]), null, 4);
 } else if (program.parroquia) {
-    respuesta = JSON.stringify(vzla.parroquia(program.args[0]), null, 2);
+    respuesta = JSON.stringify(vzla.parroquia(program.args[0]), null, 4);
 } else {
     if (!/Tal[ ]vez/.test(vzla.estado(program.args[0]))) {
         respuesta = vzla.estado(program.args[0])
