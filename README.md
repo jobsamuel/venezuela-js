@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="venezuela-js" src="http://i.imgur.com/9CNl0Af.pngg" width="auto">
+    <img alt="venezuela-js" src="http://i.imgur.com/9CNl0Af.png" width="auto">
 </p>
 <p align="center" style="color:#707070;">
   Muestra la organización territorial de Venezuela.
