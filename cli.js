@@ -17,7 +17,7 @@ var t3;
 var t4;
 var t5;
 
-updateNotifier({pkg: pkg}).notify({defer: false});
+updateNotifier({pkg: pkg}).notify();
 
 program
     .version(pkg.version)
@@ -50,7 +50,7 @@ if ((!program.args.length && program.capital) || program.args[0] === 'caracas') 
     } else if (vzla.parroquia(program.args[0]).capital) {
         respuesta = '    ' + vzla.parroquia(program.args[0]).capital;
     } else {
-        respuesta = program.args[0] + ' es un nombre inválido.';
+        respuesta = '    ' + program.args[0] + ' es un nombre inválido.';
     }
 } else if (program.municipio) {
     respuesta = JSON.stringify(vzla.municipio(program.args[0]), null, 4);
@@ -79,7 +79,7 @@ if ((!program.args.length && program.capital) || program.args[0] === 'caracas') 
     } else if (!/Tal[ ]vez/.test(vzla.parroquia(program.args[0]))) {
         respuesta = JSON.stringify(vzla.parroquia(program.args[0]), null, 4);
     } else {
-        respuesta = program.args[0] + ' es un nombre inválido.';
+        respuesta = '    ' + program.args[0] + ' es un nombre inválido.';
     }
 }
 
