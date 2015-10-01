@@ -17,6 +17,8 @@ var t3;
 var t4;
 var t5;
 
+updateNotifier({pkg: pkg}).notify({defer: false});
+
 program
     .version(pkg.version)
     .usage('<estado|municipio|parroquia> [opciones]')
@@ -39,8 +41,7 @@ program.on('--help', function(){
 if ((!program.args.length && program.capital) || program.args[0] === 'caracas') {
     respuesta = JSON.stringify(vzla.capital, null, 4);
 } else if (process.argv.length <= 2 || program.ayuda) {
-    program.help();
-    return updateNotifier({pkg: pkg}).notify();
+    return program.help();
 } else if (program.capital) {
     if (vzla.estado(program.args[0]).capital) {
         respuesta = '    ' + vzla.estado(program.args[0]).capital;
@@ -87,4 +88,3 @@ console.log(bandera);
 console.log('');
 console.log(colors.white.bold(respuesta));
 console.log('');
-updateNotifier({pkg: pkg}).notify();
