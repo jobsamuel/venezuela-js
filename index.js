@@ -33,6 +33,7 @@ function formato (nombre) {
     return nombre.toLowerCase().replace(/á|é|í|ó|ú/g, re);
 }
 
+// Retorna un Municipio o parroquia aleatoria.
 function aleatorio (tipo) {
 
     var e = vzla[Math.floor(Math.random() * (23 - 1) + 1)];
@@ -56,6 +57,7 @@ function aleatorio (tipo) {
     }
 }
 
+// Retorna información sobre un Estado.
 Venezuela.prototype.estado = function (nombre, opciones) {
 	if (!nombre) {
 		return this.capital;
@@ -90,6 +92,7 @@ Venezuela.prototype.estado = function (nombre, opciones) {
 	return resultado || nombre + ' no es un Estado. Tal vez sea una Ciudad.';
 }
 
+// Retorna información sobre un Municipio.
 Venezuela.prototype.municipio = function (nombre, opciones) {
 	if (!nombre) {
         return aleatorio('municipio');
@@ -118,6 +121,7 @@ Venezuela.prototype.municipio = function (nombre, opciones) {
 	return resultado || nombre + ' no es un Municipio. Tal vez sea una Parroquia.';
 }
 
+// Retorna información sobre una Parroquia.
 Venezuela.prototype.parroquia = function (nombre, opciones) {
 	if (!nombre) {
 		return aleatorio('parroquia');

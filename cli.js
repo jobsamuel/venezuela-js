@@ -5,7 +5,6 @@ var pkg = require('./package.json');
 var updateNotifier = require('update-notifier');
 var program = require('commander');
 var colors = require('colors');
-var path = require('path');
 var bandera = '    ' +
     colors.yellow.bold('• ') +
     colors.blue.bold('• ') +
