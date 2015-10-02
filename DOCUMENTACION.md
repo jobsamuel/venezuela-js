@@ -1,6 +1,11 @@
-# documentación
+<p align="center">
+    <img alt="venezuela-js" src="http://i.imgur.com/uJsAwbR.png" width="auto">
+</p>
+<p align="center" style="color:#707070;">
+  Documentación completa del API de venezuela-js
+</p>
 
-> Documentación completa del API de venezuela-js
+---
 
 # ¿por qué venezuela-js?
 
