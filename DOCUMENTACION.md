@@ -65,6 +65,7 @@ $  -a, --ayuda                 # Muestra cómo utilizar venezuela-js
 $  -c, --capital <nombre>      # Muesta la capital de la entidad
 $  -m, --municipio <nombre>    # Muesta información de un municipio Venezolano
 $  -p, --parroquia <nombre>    # Muesta información de una parroquia Venezolana
+$  -M, --municipios <nombre>   # Muesta todos los municipios de un estado
 ```
 
 Cabe destacar, si el parámetro **nombre** no es suministrado, se muestra un resultado aleatorio.
@@ -97,13 +98,17 @@ Retorna el número de parroquias que posee el territorio Venezolano.
 
 ## métodos
 
-### venezuela.estado(nombre)
+### venezuela.estado(nombre, opciones)
 
 Retorna un *Objeto* los detalles de un estado Venezolano.
 
 #### argumentos
 
 `nombre` Nombre del estado Venezolano deseado. Debe ser un *string*.
+
+`opciones` Configuración del resultado. Debe ser un *object*.
+
+  - `municipios` Retorna un Array con todos los municipios de un estado. Debe ser un *boolean*. Es `false` por defecto.
 
 #### ejemplo
 
@@ -120,6 +125,46 @@ El resultado será:
   "estado": "Zulia",
   "capital": "Maracaibo",
   "municipios": 21,
+  "parroquias": 106
+}
+```
+
+Y si suministras el parámetro `opciones`:
+
+```js
+var z = venezuela.estado('Zulia', { municipios: true });
+console.log(z);
+```
+
+Entonces el resultado será:
+```json
+{
+  "iso_31662": "VE-V",
+  "estado": "Zulia",
+  "capital": "Maracaibo",
+  "municipios": [
+    "Almirante Padilla",
+    "Baralt",
+    "Cabimas",
+    "Catatumbo",
+    "Colón",
+    "Francisco Javier Pulgar",
+    "Páez",
+    "Jesús Enrique Lossada",
+    "Jesús María Semprún",
+    "La Cañada de Urdaneta",
+    "Lagunillas",
+    "Machiques de Perijá",
+    "Mara",
+    "Maracaibo",
+    "Miranda",
+    "Rosario de Perijá",
+    "San Francisco",
+    "Santa Rita",
+    "Simón Bolívar",
+    "Sucre",
+    "Valmore Rodríguez"
+  ],
   "parroquias": 106
 }
 ```
