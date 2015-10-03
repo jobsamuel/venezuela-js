@@ -25,8 +25,8 @@ program
     .option('-a, --ayuda', 'muestra cómo utilizar venezuela-js')
     .option('-c, --capital nombre', 'muestra la capital de la entidad')
     .option('-m, --municipio nombre', 'muestra la información de un municipio')
-    .option('-M, --municipios', 'muestra todos los municipios de un estado')
     .option('-p, --parroquia nombre', 'muestra la información de una parroquia')
+    .option('-M, --municipios nombre', 'muestra todos los municipios de un estado')
     .parse(process.argv);
 
 program.on('--help', function (){
