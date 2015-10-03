@@ -25,6 +25,7 @@ program
     .option('-a, --ayuda', 'muestra cómo utilizar venezuela-js')
     .option('-c, --capital nombre', 'muestra la capital de la entidad')
     .option('-m, --municipio nombre', 'muestra la información de un municipio')
+    .option('-M, --municipios', 'muestra todos los municipios de un estado')
     .option('-p, --parroquia nombre', 'muestra la información de una parroquia')
     .parse(process.argv);
 
@@ -36,6 +37,29 @@ program.on('--help', function (){
   console.log('    $ venezuela Bolívar');
   console.log('');
 });
+
+function parrafo (palabras) {
+    var d = colors.grey.bold(' • ');
+    var n = palabras.length / 3;
+    var m = 0;
+    for (var i = 0; i < n; i++) {
+        var p = [];
+        var l = 0;
+        for (var j = 0; j < 3; j++) {
+            if (palabras[m + l]) {
+                p[j] = colors.yellow.bold(palabras[m + l]);
+                if (l <= 1) {
+                    p[j] += d;
+                }
+            } else {
+                p[j] = '';
+            }
+            l += 1;
+        }
+        console.log('    ' + p[0] + p[1] + p[2]);
+        m += 3;
+    }
+}
 
 if ((!program.args.length && program.capital) || program.args[0] === 'caracas') {
     respuesta = JSON.stringify(vzla.capital, null, 4);
@@ -55,6 +79,21 @@ if ((!program.args.length && program.capital) || program.args[0] === 'caracas') 
     respuesta = JSON.stringify(vzla.municipio(program.args[0]), null, 4);
 } else if (program.parroquia) {
     respuesta = JSON.stringify(vzla.parroquia(program.args[0]), null, 4);
+} else if (program.municipios && process.argv.length > 3) {
+    if (!/Tal[ ]vez/.test(vzla.estado(program.args[0]))) {
+        respuesta = vzla.estado(program.args[0], { municipios: true });
+        t1 = respuesta.estado.toUpperCase();
+        t2 = colors.white.bold('    MUNICIPIOS DEL ESTADO ' + t1);
+        t5 = colors.grey.bold('•');
+        console.log('');
+        console.log(bandera);
+        console.log('');
+        console.log(t2);
+        console.log('');
+        parrafo(respuesta.municipios);
+        console.log('');
+        return;
+    }
 } else {
     if (!/Tal[ ]vez/.test(vzla.estado(program.args[0]))) {
         respuesta = vzla.estado(program.args[0])

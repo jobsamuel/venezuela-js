@@ -59,7 +59,15 @@ Venezuela.prototype.estado = function (nombre, opciones) {
 	} else if (nombre && typeof nombre !== 'string') {
 		throw new Error('El nombre no puede ser ' + typeof nombre);
 	}
-
+    function detalles (municipios) {
+        if (opciones && opciones.municipios) {
+            return municipios.map(function (m) {
+                return m.municipio;
+            });
+        } else {
+            return municipios.length;
+        }
+    }
 	function contador (municipios) {
 	    var m = municipios.map(function (p) {
             return p.parroquias.map(function (_p) { return _p }).length;
@@ -75,7 +83,7 @@ Venezuela.prototype.estado = function (nombre, opciones) {
 				iso_31662: edo.iso_31662,
 				estado: edo.estado,
 				capital: edo.capital,
-				municipios: edo.municipios.length,
+				municipios: detalles(edo.municipios),
 				parroquias: contador(edo.municipios)
 			};
 			return true;
