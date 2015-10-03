@@ -28,7 +28,7 @@ program
     .option('-p, --parroquia nombre', 'muestra la información de una parroquia')
     .parse(process.argv);
 
-program.on('--help', function(){
+.on('--help', function () {
   console.log('  Ejemplos:');
   console.log('');
   console.log('    $ venezuela --parroquia "San Juan"');

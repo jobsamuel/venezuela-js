@@ -16,11 +16,9 @@ function Venezuela () {
 
 // Quita acentos de las palabras.
 function formato (nombre) {
-
     var _l = ['á', 'é', 'í', 'ó', 'ú'];
     var _p = 'aeiou';
     var r;
-
     var re = function (l, p) {
         _l.forEach(function (__l, n) {
             if (__l === l) {
@@ -29,20 +27,17 @@ function formato (nombre) {
         });
         return r;
     }
-
     return nombre.toLowerCase().replace(/á|é|í|ó|ú/g, re);
 }
 
 // Retorna un Municipio o parroquia aleatoria.
 function aleatorio (tipo) {
-
     var e = vzla[Math.floor(Math.random() * (23 - 1) + 1)];
     var m = e.municipios;
     var _m = m[Math.floor(Math.random() * (m.length - 2) + 1)];
     var p = _m.parroquias;
     var _p = p[Math.floor(Math.random() * (p.length - 2) + 1)];
     var r;
-
     if (tipo === 'municipio') {
         r = _m;
         r.estado = e.estado;
@@ -71,9 +66,7 @@ Venezuela.prototype.estado = function (nombre, opciones) {
         });
 		return m.reduce(function (a, b) { return a + b } );
 	}
-
 	var resultado;
-
 	vzla.some(function (edo) {
 		var _nombre = formato(nombre);
 		var _estado = formato(edo.estado);
@@ -88,7 +81,6 @@ Venezuela.prototype.estado = function (nombre, opciones) {
 			return true;
 		}
 	});
-
 	return resultado || nombre + ' no es un Estado. Tal vez sea una Ciudad.';
 }
 
@@ -99,9 +91,7 @@ Venezuela.prototype.municipio = function (nombre, opciones) {
 	} else if (nombre && typeof nombre !== 'string') {
 		throw new Error('El nombre no puede ser ' + typeof nombre);
 	}
-
 	var resultado;
-
 	vzla.forEach(function (e) {
 		e.municipios.some(function (m) {
 			var _nombre = formato(nombre);
@@ -117,7 +107,6 @@ Venezuela.prototype.municipio = function (nombre, opciones) {
 			}
 		});
 	});
-
 	return resultado || nombre + ' no es un Municipio. Tal vez sea una Parroquia.';
 }
 
@@ -128,9 +117,7 @@ Venezuela.prototype.parroquia = function (nombre, opciones) {
 	} else if (nombre && typeof nombre !== 'string') {
 		throw new Error('El nombre no puede ser ' + typeof nombre);
 	}
-
 	var resultados = [];
-
     vzla.map(function (p) {
         p.municipios.map(function (_p) {
             return _p.parroquias.filter(function (__p) {
@@ -151,11 +138,9 @@ Venezuela.prototype.parroquia = function (nombre, opciones) {
         });
 
     });
-
     if (!resultados[0]) {
         return nombre + ' no es una Parroquia. Tal vez sea un Municipio.';
     }
-
     return resultados;
 }
 
