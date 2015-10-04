@@ -68,6 +68,13 @@ $  -p, --parroquia <nombre>    # Muesta información de una parroquia Venezolana
 $  -M, --municipios <nombre>   # Muesta todos los municipios de un estado
 ```
 
+El `nombre` debe ser estar entre comillas si está compuesto por más de dos palabras, de resto puede ir sin ellas. Por ejemplo:
+
+```bash
+$ venezuela Zulia              # Muestra la informacion del Estado Zulia
+$ venezuela "Nueva Esparta"    # Muestra la información del Estado Nueva Esparta
+```
+
 Cabe destacar, si el parámetro **nombre** no es suministrado, se muestra un resultado aleatorio.
 
 # api

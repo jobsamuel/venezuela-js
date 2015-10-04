@@ -32,9 +32,13 @@ program
 program.on('--help', function (){
   console.log('  Ejemplos:');
   console.log('');
-  console.log('    $ venezuela --parroquia "San Juan"');
+  console.log('    $ venezuela "Nueva Esparta"');
+  console.log('    $ venezuela Zulia');
   console.log('    $ venezuela --capital');
-  console.log('    $ venezuela Bolívar');
+  console.log('    $ venezuela --municipio Libertador');
+  console.log('    $ venezuela --parroquia "San Juan"');
+  console.log('    $ venezuela Bolívar -M');
+  console.log('    $ venezuela Falcón -c');
   console.log('');
 });
 
