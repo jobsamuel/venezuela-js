@@ -100,7 +100,7 @@ if ((!program.args.length && program.capital) || program.args[0] === 'caracas') 
     } else {
         respuesta = '    ' + program.args[0] + ' es un nombre inválido.';
     }
-} else {
+} else if (program.args[0]) {
     if (!/Tal[ ]vez/.test(vzla.estado(program.args[0]))) {
         respuesta = vzla.estado(program.args[0])
         t1 = colors.white.bold('     ISO 31662    ');
@@ -125,6 +125,8 @@ if ((!program.args.length && program.capital) || program.args[0] === 'caracas') 
     } else {
         respuesta = '    ' + program.args[0] + ' es un nombre inválido.';
     }
+} else {
+    respuesta = '    Debes ingresar un nombre.';
 }
 
 console.log('');
