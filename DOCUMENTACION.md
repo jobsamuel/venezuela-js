@@ -9,7 +9,9 @@
 
 # ¿por qué venezuela-js?
 
-Nunca fui bueno para aprenderme todos los Estados y Capitales de mi país, simplemente nunca los aprendí. Así que, como me encanta [Node](https://nodejs.org/en/) y las cosas simples, decidí hacer un módulo que permitiera obtener la información de un Estado, Municipio o Parroquia de Venezuela con tan sólo escribir su nombre en la terminal o un script. ¿Te gustaría utilizarlo?
+Nunca fui bueno para aprenderme todos los Estados y Capitales de mi país, así que, como me encanta [Node](https://nodejs.org/en/) y las cosas simples, decidí hacer un módulo que permitiera obtener la información de un Estado, Municipio o Parroquia de Venezuela, con tan sólo escribir su nombre en la terminal o un script. 
+
+¿Te gustaría utilizarlo?
 
 # índice
 
