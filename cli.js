@@ -97,6 +97,8 @@ if ((!program.args.length && program.capital) || program.args[0] === 'caracas') 
         parrafo(respuesta.municipios);
         console.log('');
         return;
+    } else {
+        respuesta = '    ' + program.args[0] + ' es un nombre inválido.';
     }
 } else {
     if (!/Tal[ ]vez/.test(vzla.estado(program.args[0]))) {
