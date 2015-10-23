@@ -24,7 +24,7 @@ Nunca fui bueno para aprenderme todos los Estados y Capitales de mi país, así 
 
 # requisitos
 
-Para comenzar, sólo necesitas tener [Node](https://nodejs.org/en/) y [npm](https://www.npmjs.com/) instalados.
+Para comenzar, sólo necesitas tener [Node](https://nodejs.org/en/) instalado.
 
 # instalación
 
