@@ -5,10 +5,10 @@
   Muestra la organización territorial de Venezuela.
 </p>
 <p align="center">
-  <a href="http://badge.fury.io/js/venezuela"><img alt="version" src="https://badge.fury.io/js/venezuela.svg"></a>
-  <a href="https://www.npmjs.com/package/venezuela"><img alt="descargas" src="https://img.shields.io/npm/dt/venezuela.svg"></a>
-  <a href="http://badge.fury.io/js/venezuela"><img alt="dependencias" src="https://david-dm.org/jobsamuel/venezuela-js.svg"></a>
-  <a href="https://www.npmjs.com/package/venezuela"><img alt="licencia" src="https://img.shields.io/npm/l/venezuela.svg"></a>
+  <a href="https://www.npmjs.com/package/venezuela"><img alt="version" src="https://img.shields.io/npm/v/venezuela.svg?style=flat-square"></a>
+  <a href="https://www.npmjs.com/package/venezuela"><img alt="descargas" src="https://img.shields.io/npm/dt/venezuela.svg?style=flat-square"></a>
+  <a href="http://badge.fury.io/js/venezuela"><img alt="dependencias" src="https://david-dm.org/jobsamuel/venezuela-js.svg?style=flat-square"></a>
+  <a href="https://www.npmjs.com/package/venezuela"><img alt="licencia" src="https://img.shields.io/npm/l/venezuela.svg?style=flat-square"></a>
 </p>
 
 ----
