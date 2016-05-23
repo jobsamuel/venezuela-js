@@ -117,7 +117,7 @@ Retorna un *Objeto* los detalles de un estado Venezolano.
 
 `opciones` Configuración del resultado. Debe ser un *object*.
 
-  - `municipios` Retorna un Array con todos los municipios de un estado. Debe ser un *boolean*. Es `false` por defecto.
+  - `municipios` Retorna un Array con todos los municipios de un estado. Debe ser un *boolean*. Por defecto, es `false`.
 
 #### ejemplo
 
