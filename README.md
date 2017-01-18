@@ -26,4 +26,4 @@ $ venezuela --ayuda
 
 # licencia
 
-Licencia [MIT](http://opensource.org/licenses/MIT) :copyright: 2016 Jobsamuel Núñez
+Licencia [MIT](http://opensource.org/licenses/MIT) :copyright: 2017 Jobsamuel Núñez
