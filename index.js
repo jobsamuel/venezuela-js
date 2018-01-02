@@ -3,7 +3,7 @@
 const pais = require('./venezuela');
 
 function venezuela() {
-  const { iso_31662, estado, capital, municipios } = pais[23];
+  const { iso_31662, estado: edo, capital, municipios } = pais[23];
   const api = {
     pais,
     estado,
@@ -14,8 +14,8 @@ function venezuela() {
     parroquias: 1139,
     capital: {
       iso_31662,
-      estado,
       capital,
+      estado: edo,
       municipio: municipios[0].municipio,
       parroquias: municipios[0].parroquias
     }
