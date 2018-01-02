@@ -16,8 +16,8 @@ function venezuela() {
       iso_31662,
       estado,
       capital,
-      municipio: municipios.municipio,
-      parroquias: municipios.parroquias
+      municipio: municipios[0].municipio,
+      parroquias: municipios[0].parroquias
     }
   };
 
