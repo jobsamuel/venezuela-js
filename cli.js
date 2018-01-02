@@ -43,26 +43,24 @@ program.on('--help', function (){
 });
 
 function parrafo (palabras) {
-    var d = colors.grey.bold(' • ');
-    var n = palabras.length / 3;
-    var m = 0;
-    for (var i = 0; i < n; i++) {
-        var p = [];
-        var l = 0;
-        for (var j = 0; j < 3; j++) {
-            if (palabras[m + l]) {
-                p[j] = colors.yellow.bold(palabras[m + l]);
-                if (l <= 1) {
-                    p[j] += d;
-                }
-            } else {
-                p[j] = '';
-            }
-            l += 1;
-        }
-        console.log('    ' + p[0] + p[1] + p[2]);
-        m += 3;
-    }
+  const punto = colors.grey.bold('•');
+  const numeroDeGrupos = palabras.length / 3;
+  let grupos = [];
+
+  for (let i = 0; i < numeroDeGrupos; i++) {
+    const grupo = palabras.slice(i*3, i*3+3);
+    const grupoConEstilo = grupo.map((palabra, index) => {
+      if (index === 0) {
+        return `${' '.repeat(4)} ${colors.yellow.bold(palabra)}`
+      } else {
+        return ` ${punto} ${colors.yellow.bold(palabra)}`;
+      }
+    });
+
+    grupos = [...grupos, grupoConEstilo];
+  }
+
+  grupos.forEach(grupo => console.log(...grupo));
 }
 
 if ((!program.args.length && program.capital) || program.args[0] === 'caracas') {
