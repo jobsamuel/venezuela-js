@@ -102,22 +102,24 @@ const mensaje = `  ${bandera}\n${respuesta}`;
 console.log(mensaje);
 
 function parrafo (palabras) {
-  const punto = colors.grey.bold('•');
+  const separador = colors.grey.bold('•');
   const numeroDeGrupos = palabras.length / 3;
   let grupos = [];
+  let parrafo;
 
-  for (let i = 0; i < numeroDeGrupos; i++) {
-    const grupo = palabras.slice(i*3, i*3+3);
-    const grupoConEstilo = grupo.map((palabra, index) => {
-      if (index === 0) {
-        return `${colors.yellow.bold(palabra)}`
-      } else {
-        return ` ${punto} ${colors.yellow.bold(palabra)}`;
-      }
+  for (let n = 0; n < numeroDeGrupos; n++) {
+    const grupo = palabras.slice(n*3, n*3+3);
+    const grupoConEstilo = grupo.map((palabra, indice) => {
+      const palabraAmarilla = colors.yellow.bold(palabra);
+
+      return indice === 0 ? palabraAmarilla : ` ${separador} ${palabraAmarilla}`;
     });
 
     grupos = [...grupos, grupoConEstilo];
   }
 
-  return grupos.map(grupo => grupo.join()).reduce((a, b) => `${a}\n  ${b}`);
+  parrafo = grupos.map(grupo => grupo.join())
+    .reduce((parrafo, oracion) => `${parrafo}\n  ${oracion}`);
+
+  return parrafo;
 }
