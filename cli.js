@@ -43,6 +43,7 @@ program.on('--help', () => {
 
 function consulta() {
   const consulta = program.args ? program.args[0] : undefined;
+  const necesitaAyuda = 'n/a';
 
   if (!consulta && program.capital) {
     return venezuela.capital;
@@ -56,8 +57,12 @@ function consulta() {
     return venezuela.municipio(consulta);
   } else if (program.parroquia) {
     return venezuela.parroquia(consulta);
-  } else if (program.ayuda || process.argv.length <= 2) {
-    return 'n/a';
+  } else if (program.ayuda || process.argv.length === 2) {
+    return necesitaAyuda;
+  } else if (process.argv.length === 3) {
+    return (venezuela.estado(consulta) ||
+      venezuela.municipio(consulta) ||
+        venezuela.parroquia(consulta));
   } else {
     return consulta;
   }
