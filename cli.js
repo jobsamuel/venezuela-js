@@ -41,6 +41,24 @@ program.on('--help', () => {
 
 // TODO: Mostrar resultado de una consulta.
 
+function mostrarEstado(info) {
+  const titulos = ['ISO 31662', 'ESTADO', 'CAPITAL', 'MUNICIPIOS', 'PARROQUIAS'];
+
+  const titulosConEstilo = titulos.map(titulo => {
+    return colors.white.bold(titulo);
+  });
+
+  const infoConEstilo = Object.keys(info).map(nombre => {
+    return colors.yellow.bold(info[nombre]);
+  });
+
+  const informacion = titulosConEstilo.map((titulo, index) => {
+    return `${titulo}${' '.repeat(4)}${infoConEstilo[index]}`;
+  }).join('\n');
+
+  return informacion;
+}
+
 function consulta() {
   const consulta = program.args ? program.args[0] : undefined;
   const necesitaAyuda = 'n/a';
