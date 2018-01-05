@@ -41,6 +41,15 @@ program.on('--help', () => {
 
 // TODO: Mostrar resultado de una consulta.
 
+function mostrarMunicipios(info) {
+  const titulo = `MUNICIPIOS DEL ESTADO ${info.estado.toUpperCase()}`;
+  const tituloConEstilo = colors.white.bold(titulo);
+  const municipios = parrafo(info.municipios);
+  const informacion = `${tituloConEstilo}\n\n${municipios}`;
+
+  return informacion;
+}
+
 function mostrarEstado(info) {
   const titulos = ['ISO 31662', 'ESTADO', 'CAPITAL', 'MUNICIPIOS', 'PARROQUIAS'];
 
