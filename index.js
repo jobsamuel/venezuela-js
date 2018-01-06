@@ -110,7 +110,7 @@ function municipio(nombre, opciones) {
 					municipio: municipio.municipio,
 					capital: municipio.capital,
 					estado: estado.estado,
-					parroquias: municipio.parroquias
+					parroquias: detalles(municipio.parroquias)
 				};
 
         return true;
@@ -119,6 +119,14 @@ function municipio(nombre, opciones) {
 	});
 
   return resultado;
+
+  function detalles(parroquias) {
+    if (opciones && opciones.parroquias) {
+      return parroquias.map(data => data);
+    } else {
+      return parroquias.length;
+    }
+  }
 }
 
 // Retorna información sobre una Parroquia.
