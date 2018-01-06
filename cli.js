@@ -41,6 +41,9 @@ program.on('--help', () => {
 
 // TODO: Mostrar resultado de una consulta.
 
+// DEBUG
+console.log(consulta());
+
 function mostrarMunicipios(info) {
   const titulo = `MUNICIPIOS DEL ESTADO ${info.estado.toUpperCase()}`;
   const tituloConEstilo = colors.white.bold(titulo);
@@ -75,9 +78,11 @@ function consulta() {
   if (!consulta && program.capital) {
     return venezuela.capital;
   } else if (program.capital) {
-    return (venezuela.estado(consulta).capital ||
-      venezuela.municipio(consulta).capital ||
-        venezuela.parroquia(consulta).capital);
+    const data = (venezuela.estado(consulta) ||
+      venezuela.municipio(consulta) ||
+        venezuela.parroquia(consulta));
+
+    return data ? data.capital : false;
   } else if (program.municipios) {
     return venezuela.estado(consulta, {municipios: true});
   } else if (program.municipio) {
