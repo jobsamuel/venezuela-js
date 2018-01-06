@@ -3,7 +3,6 @@
 const pais = require('./venezuela');
 
 function venezuela() {
-  const { iso_31662, estado: edo, capital, municipios } = pais[23];
   const api = {
     pais,
     estado,
@@ -12,13 +11,7 @@ function venezuela() {
     estados: 24,
     municipios: 335,
     parroquias: 1139,
-    capital: {
-      iso_31662,
-      capital,
-      estado: edo,
-      municipio: municipios[0].municipio,
-      parroquias: municipios[0].parroquias
-    }
+    capital: estado(pais[23].estado)
   };
 
   return api;
@@ -83,7 +76,7 @@ function estado(nombre, opciones) {
 		}
 	});
 
-	return resultado || `${nombre} no es un Estado.`;
+	return resultado;
 
   function detalles(municipios) {
     if (opciones && opciones.municipios) {
@@ -125,7 +118,7 @@ function municipio(nombre, opciones) {
 		});
 	});
 
-  return resultado || `${nombre} no es un Municipio.`;
+  return resultado;
 }
 
 // Retorna información sobre una Parroquia.
@@ -157,7 +150,7 @@ function parroquia(nombre, opciones) {
     });
   });
 
-  return resultados[0] ? resultados : `${nombre} no es un Parroquia.`;
+  return resultados[0] ? resultados : undefined;
 }
 
 module.exports = venezuela();

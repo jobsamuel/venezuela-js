@@ -91,7 +91,7 @@ function consulta() {
       venezuela.municipio(consulta) ||
         venezuela.parroquia(consulta));
   } else {
-    return consulta;
+    return false;
   }
 }
 
