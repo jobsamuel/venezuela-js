@@ -75,14 +75,25 @@ function mostrarResultado(resultado) {
   } else if (typeof resultado === 'object' && typeof resultado.municipios === 'number') {
     console.log(`${bandera}\n\n${mostrarEstado(resultado)}`);
   } else if (Array.isArray(resultado)) {
-
-    // TODO: Dar formato a parroquias.
-    console.log(resultado);
+    console.log(mostrarParroquias(resultado));
   } else if (typeof resultado === 'object') {
     console.log(`${bandera}\n\n${mostrarMunicipios(resultado)}`);
   } else {
     console.log(`${bandera}\n\n${colors.white.bold('Consulta inválida.')}`);
   }
+}
+
+function mostrarParroquias(info) {
+  const informacion = info.map(parroquia => {
+    return Object.keys(parroquia).map(dato => {
+      const titulo = colors.white.bold(dato.toUpperCase());
+      const contenido = colors.cyan.bold(parroquia[dato].toUpperCase());
+
+      return `${titulo}${' '.repeat(4)}${contenido}`;
+    }).join('\n');
+  }).join('\n\n');
+
+  return informacion;
 }
 
 function mostrarMunicipios(info) {
