@@ -39,10 +39,51 @@ program.on('--help', () => {
   console.log(mensaje);
 });
 
-// TODO: Mostrar resultado de una consulta.
+(function consulta() {
+  const consulta = program.args ? program.args[0] : undefined;
+  const necesitaAyuda = 'n/a';
+  let resultado;
 
-// DEBUG
-console.log(consulta());
+  if (!consulta && program.capital) {
+    resultado = venezuela.capital;
+  } else if (program.capital) {
+    const data = (venezuela.estado(consulta) ||
+      venezuela.municipio(consulta) ||
+        venezuela.parroquia(consulta));
+
+    resultado = data ? data.capital : undefined;
+  } else if (program.municipios) {
+    resultado = venezuela.estado(consulta, {municipios: true});
+  } else if (program.municipio) {
+    resultado = venezuela.municipio(consulta);
+  } else if (program.parroquia) {
+    resultado = venezuela.parroquia(consulta);
+  } else if (program.ayuda || process.argv.length === 2) {
+    resultado = necesitaAyuda;
+  } else if (process.argv.length === 3) {
+    resultado = (venezuela.estado(consulta) ||
+      venezuela.municipio(consulta) ||
+        venezuela.parroquia(consulta));
+  }
+
+  mostrarResultado(resultado);
+})()
+
+function mostrarResultado(resultado) {
+  if (typeof resultado === 'string') {
+    console.log(`${bandera}\n\n${colors.white.bold(resultado)}`);
+  } else if (typeof resultado === 'object' && typeof resultado.municipios === 'number') {
+    console.log(`${bandera}\n\n${mostrarEstado(resultado)}`);
+  } else if (Array.isArray(resultado)) {
+
+    // TODO: Dar formato a parroquias.
+    console.log(resultado);
+  } else if (typeof resultado === 'object') {
+    console.log(`${bandera}\n\n${mostrarMunicipios(resultado)}`);
+  } else {
+    console.log(`${bandera}\n\n${colors.white.bold('Consulta inválida.')}`);
+  }
+}
 
 function mostrarMunicipios(info) {
   const titulo = `MUNICIPIOS DEL ESTADO ${info.estado.toUpperCase()}`;
@@ -69,35 +110,6 @@ function mostrarEstado(info) {
   }).join('\n');
 
   return informacion;
-}
-
-function consulta() {
-  const consulta = program.args ? program.args[0] : undefined;
-  const necesitaAyuda = 'n/a';
-
-  if (!consulta && program.capital) {
-    return venezuela.capital;
-  } else if (program.capital) {
-    const data = (venezuela.estado(consulta) ||
-      venezuela.municipio(consulta) ||
-        venezuela.parroquia(consulta));
-
-    return data ? data.capital : false;
-  } else if (program.municipios) {
-    return venezuela.estado(consulta, {municipios: true});
-  } else if (program.municipio) {
-    return venezuela.municipio(consulta);
-  } else if (program.parroquia) {
-    return venezuela.parroquia(consulta);
-  } else if (program.ayuda || process.argv.length === 2) {
-    return necesitaAyuda;
-  } else if (process.argv.length === 3) {
-    return (venezuela.estado(consulta) ||
-      venezuela.municipio(consulta) ||
-        venezuela.parroquia(consulta));
-  } else {
-    return false;
-  }
 }
 
 function parrafo (palabras) {
