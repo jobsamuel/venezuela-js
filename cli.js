@@ -63,7 +63,7 @@ program.on('--help', () => {
   }
 
   mostrarResultado(resultado);
-})()
+})();
 
 function crearBandera() {
   const amarillo = colors.yellow.bold('▓▒');
@@ -75,17 +75,26 @@ function crearBandera() {
 }
 
 function mostrarResultado(resultado) {
-  if (typeof resultado === 'string') {
-    console.log(`${bandera}\n\n${colors.white.bold(resultado)}`);
+  let contenedor;
+  let contenido;
+
+  if (typeof resultado === 'string' && resultado === 'n/a') {
+    return program.help();
+  } else if (typeof resultado === 'string') {
+    contenido = colors.white.bold(resultado);
   } else if (typeof resultado === 'object' && typeof resultado.municipios === 'number') {
-    console.log(`${bandera}\n\n${mostrarEstado(resultado)}`);
+    contenido = mostrarEstado(resultado);
   } else if (Array.isArray(resultado)) {
-    console.log(mostrarParroquias(resultado));
+    contenido = mostrarParroquias(resultado);
   } else if (typeof resultado === 'object') {
-    console.log(`${bandera}\n\n${mostrarMunicipios(resultado)}`);
+    contenido = mostrarMunicipios(resultado);
   } else {
-    console.log(`${bandera}\n\n${colors.white.bold('Consulta inválida.')}`);
+    contenido = colors.white.bold('Nombre inválido.');
   }
+
+  contenedor = `\n${' '.repeat(4)}${crearBandera()}\n\n${contenido}`;
+
+  console.log(contenedor);
 }
 
 function mostrarParroquias(info) {
