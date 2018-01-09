@@ -75,6 +75,8 @@ function crearBandera() {
 }
 
 function mostrarResultado(resultado) {
+  const esUnEstado = typeof resultado.municipios === 'number';
+  const esUnMunicipio = typeof resultado.parroquias === 'number';
   let contenedor;
   let contenido;
 
@@ -82,12 +84,14 @@ function mostrarResultado(resultado) {
     return program.help();
   } else if (typeof resultado === 'string') {
     contenido = colors.white.bold(resultado);
-  } else if (typeof resultado === 'object' && typeof resultado.municipios === 'number') {
+  } else if (typeof resultado === 'object' && esUnEstado) {
     contenido = mostrarEstado(resultado);
-  } else if (Array.isArray(resultado)) {
-    contenido = mostrarParroquias(resultado);
+  } else if (typeof resultado === 'object' && esUnMunicipio) {
+    contenido = mostrarMunicipio(resultado);
   } else if (typeof resultado === 'object') {
     contenido = mostrarMunicipios(resultado);
+  } else if (Array.isArray(resultado)) {
+    contenido = mostrarParroquias(resultado);
   } else {
     contenido = colors.white.bold('Nombre inválido.');
   }
@@ -117,6 +121,15 @@ function mostrarMunicipios(info) {
   const informacion = `${tituloConEstilo}\n\n${municipios}`;
 
   return informacion;
+}
+
+function mostrarMunicipio(info) {
+  return Object.keys(info).map(dato => {
+    const titulo = colors.white.bold(dato.toUpperCase());
+    const contenido = colors.cyan.bold(typeof info[dato] === 'number' ? info[dato] : info[dato].toUpperCase());
+
+    return `${titulo}${' '.repeat(4)}${contenido}`;
+  }).join('\n');
 }
 
 function mostrarEstado(info) {
