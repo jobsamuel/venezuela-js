@@ -5,10 +5,6 @@ const pkg = require('./package.json');
 const updateNotifier = require('update-notifier');
 const program = require('commander');
 const colors = require('colors');
-const amarillo = colors.yellow.bold('•');
-const azul = colors.blue.bold('•');
-const rojo = colors.red.bold('•');
-const bandera = `${amarillo} ${azul} ${rojo}`;
 
 updateNotifier({pkg: pkg}).notify();
 
@@ -68,6 +64,15 @@ program.on('--help', () => {
 
   mostrarResultado(resultado);
 })()
+
+function crearBandera() {
+  const amarillo = colors.yellow.bold('▓▒');
+  const azul = colors.blue.bold('▓▒');
+  const rojo = colors.red.bold('▓▒');
+  const bandera = `${amarillo}${azul}${rojo}`;
+
+  return bandera;
+}
 
 function mostrarResultado(resultado) {
   if (typeof resultado === 'string') {
