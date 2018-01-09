@@ -65,15 +65,6 @@ program.on('--help', () => {
   mostrarResultado(resultado);
 })();
 
-function crearBandera() {
-  const amarillo = colors.yellow.bold('▓▒');
-  const azul = colors.blue.bold('▓▒');
-  const rojo = colors.red.bold('▓▒');
-  const bandera = `${amarillo}${azul}${rojo}`;
-
-  return bandera;
-}
-
 function mostrarResultado(resultado) {
   const esUnEstado = typeof resultado.municipios === 'number';
   const esUnMunicipio = typeof resultado.parroquias === 'number';
@@ -87,9 +78,9 @@ function mostrarResultado(resultado) {
   } else if (typeof resultado === 'object' && (esUnEstado || esUnMunicipio)) {
     contenido = mostrarEntidad(resultado);
   } else if (typeof resultado === 'object' && Array.isArray(resultado.municipios)) {
-    contenido = mostrarMunicipios(resultado);
+    contenido = mostrarListaDeMunicipios(resultado);
   } else if (Array.isArray(resultado)) {
-    contenido = mostrarParroquias(resultado);
+    contenido = mostrarEntidades(resultado);
   } else {
     contenido = colors.white.bold('Nombre inválido.');
   }
@@ -108,26 +99,31 @@ function mostrarEntidad(datos) {
 
     return `${tituloConEstilo}${' '.repeat(4)}${contenidoConEstilo}`;
   }).join('\n');
+};
+
+function mostrarEntidades(datos) {
+  return datos.map(dato => mostrarEntidad(dato)).join('\n\n');
 }
 
-function mostrarParroquias(info) {
-  const informacion = info.map(parroquia => {
-    return mostrarEntidad(parroquia);
-  }).join('\n\n');
-
-  return informacion;
-}
-
-function mostrarMunicipios(info) {
-  const titulo = `MUNICIPIOS DEL ESTADO ${info.estado.toUpperCase()}`;
+function mostrarListaDeMunicipios(datos) {
+  const titulo = `MUNICIPIOS DEL ESTADO ${datos.estado.toUpperCase()}`;
   const tituloConEstilo = colors.white.bold(titulo);
-  const municipios = parrafo(info.municipios);
+  const municipios = crearParrafo(datos.municipios);
   const informacion = `${tituloConEstilo}\n\n${municipios}`;
 
   return informacion;
 }
 
-function parrafo (palabras) {
+function crearBandera() {
+  const amarillo = colors.yellow.bold('▓▒');
+  const azul = colors.blue.bold('▓▒');
+  const rojo = colors.red.bold('▓▒');
+  const bandera = `${amarillo}${azul}${rojo}`;
+
+  return bandera;
+}
+
+function crearParrafo(palabras) {
   const separador = colors.grey.bold('•');
   const numeroDeGrupos = palabras.length / 3;
   let grupos = [];
