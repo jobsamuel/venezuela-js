@@ -84,11 +84,9 @@ function mostrarResultado(resultado) {
     return program.help();
   } else if (typeof resultado === 'string') {
     contenido = colors.white.bold(resultado);
-  } else if (typeof resultado === 'object' && esUnEstado) {
-    contenido = mostrarEstado(resultado);
-  } else if (typeof resultado === 'object' && esUnMunicipio) {
-    contenido = mostrarMunicipio(resultado);
-  } else if (typeof resultado === 'object') {
+  } else if (typeof resultado === 'object' && (esUnEstado || esUnMunicipio)) {
+    contenido = mostrarEntidad(resultado);
+  } else if (typeof resultado === 'object' && Array.isArray(resultado.municipios)) {
     contenido = mostrarMunicipios(resultado);
   } else if (Array.isArray(resultado)) {
     contenido = mostrarParroquias(resultado);
@@ -101,14 +99,20 @@ function mostrarResultado(resultado) {
   console.log(contenedor);
 }
 
+function mostrarEntidad(datos) {
+  return Object.keys(datos).map(nombre => {
+    const titulo = nombre.replace('_', ' ').toUpperCase();
+    const contenido = typeof datos[nombre] === 'number' ? datos[nombre] : datos[nombre].toUpperCase();
+    const tituloConEstilo = colors.white.bold(titulo);
+    const contenidoConEstilo = colors.yellow.bold(contenido);
+
+    return `${tituloConEstilo}${' '.repeat(4)}${contenidoConEstilo}`;
+  }).join('\n');
+}
+
 function mostrarParroquias(info) {
   const informacion = info.map(parroquia => {
-    return Object.keys(parroquia).map(dato => {
-      const titulo = colors.white.bold(dato.toUpperCase());
-      const contenido = colors.cyan.bold(parroquia[dato].toUpperCase());
-
-      return `${titulo}${' '.repeat(4)}${contenido}`;
-    }).join('\n');
+    return mostrarEntidad(parroquia);
   }).join('\n\n');
 
   return informacion;
@@ -119,33 +123,6 @@ function mostrarMunicipios(info) {
   const tituloConEstilo = colors.white.bold(titulo);
   const municipios = parrafo(info.municipios);
   const informacion = `${tituloConEstilo}\n\n${municipios}`;
-
-  return informacion;
-}
-
-function mostrarMunicipio(info) {
-  return Object.keys(info).map(dato => {
-    const titulo = colors.white.bold(dato.toUpperCase());
-    const contenido = colors.cyan.bold(typeof info[dato] === 'number' ? info[dato] : info[dato].toUpperCase());
-
-    return `${titulo}${' '.repeat(4)}${contenido}`;
-  }).join('\n');
-}
-
-function mostrarEstado(info) {
-  const titulos = ['ISO 31662', 'ESTADO', 'CAPITAL', 'MUNICIPIOS', 'PARROQUIAS'];
-
-  const titulosConEstilo = titulos.map(titulo => {
-    return colors.white.bold(titulo);
-  });
-
-  const infoConEstilo = Object.keys(info).map(nombre => {
-    return colors.yellow.bold(info[nombre]);
-  });
-
-  const informacion = titulosConEstilo.map((titulo, index) => {
-    return `${titulo}${' '.repeat(4)}${infoConEstilo[index]}`;
-  }).join('\n');
 
   return informacion;
 }
