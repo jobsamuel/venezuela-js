@@ -79,26 +79,21 @@ const crear = (function () {
   }
 
   function parrafo(palabras) {
-    const separador = colors.grey.bold('•');
     const numeroDeGrupos = palabras.length / 3;
     let grupos = [];
     let parrafo;
 
     for (let n = 0; n < numeroDeGrupos; n++) {
-      const grupo = palabras.slice(n*3, n*3+3);
-      const grupoConEstilo = grupo.map((palabra, indice) => {
-        const palabraAmarilla = colors.yellow.bold(palabra);
+      const grupo = palabras.slice(n*3, n*3+3)
+        .map((palabra, indice) => indice === 0 ? palabra : ` • ${palabra}`);
 
-        return indice === 0 ? palabraAmarilla : ` ${separador} ${palabraAmarilla}`;
-      });
-
-      grupos = [...grupos, grupoConEstilo];
+      grupos = [...grupos, grupo];
     }
 
-    parrafo = grupos.map(grupo => grupo.join())
-      .reduce((parrafo, oracion) => `${parrafo}\n  ${oracion}`);
+    parrafo = grupos.map(grupo => grupo.join(''))
+      .reduce((parrafo, oracion) => `${parrafo}\n${oracion}`);
 
-    return parrafo;
+    return colors.yellow.bold(parrafo);
   }
 })();
 
