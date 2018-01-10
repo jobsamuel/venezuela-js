@@ -66,13 +66,13 @@ const mostrar = (function () {
   };
 
   function entidades(datos) {
-    return datos.map(dato => this.entidad(dato)).join('\n\n');
+    return datos.map(dato => entidad(dato)).join('\n\n');
   }
 
   function listaDeMunicipios(datos) {
     const titulo = `MUNICIPIOS DEL ESTADO ${datos.estado.toUpperCase()}`;
     const tituloConEstilo = colors.white.bold(titulo);
-    const municipios = this.parrafo(datos.municipios);
+    const municipios = parrafo(datos.municipios);
     const informacion = `${tituloConEstilo}\n\n${municipios}`;
 
     return informacion;
@@ -102,9 +102,9 @@ const mostrar = (function () {
   }
 })();
 
-(function consulta() {
+(function consulta () {
   const consulta = program.args ? program.args[0] : undefined;
-  const necesitaAyuda = 'n/a';
+  let necesitaAyuda = false;
   let resultado;
 
   if (!consulta && program.capital) {
@@ -122,34 +122,30 @@ const mostrar = (function () {
   } else if (program.parroquia) {
     resultado = venezuela.parroquia(consulta);
   } else if (program.ayuda || process.argv.length === 2) {
-    resultado = necesitaAyuda;
+    necesitaAyuda = true;
   } else if (process.argv.length === 3) {
     resultado = (venezuela.estado(consulta) ||
       venezuela.municipio(consulta) ||
         venezuela.parroquia(consulta));
   }
 
-  mostrarResultado(resultado);
+  necesitaAyuda ? program.help() : mostrarResultado(resultado);
 })();
 
 function mostrarResultado(resultado) {
-  const esUnEstado = typeof resultado.municipios === 'number';
-  const esUnMunicipio = typeof resultado.parroquias === 'number';
   let contenedor;
   let contenido;
 
-  if (typeof resultado === 'string' && resultado === 'n/a') {
-    return program.help();
+  if (!resultado) {
+    contenido = colors.white.bold('Nombre inválido.');
   } else if (typeof resultado === 'string') {
     contenido = colors.white.bold(resultado);
-  } else if (typeof resultado === 'object' && (esUnEstado || esUnMunicipio)) {
-    contenido = mostrar.entidad(resultado);
-  } else if (typeof resultado === 'object' && Array.isArray(resultado.municipios)) {
-    contenido = mostrar.listaDeMunicipios(resultado);
   } else if (Array.isArray(resultado)) {
     contenido = mostrar.entidades(resultado);
+  } else if (Array.isArray(resultado.municipios)) {
+    contenido = mostrar.listaDeMunicipios(resultado);
   } else {
-    contenido = colors.white.bold('Nombre inválido.');
+    contenido = mostrar.entidad(resultado);
   }
 
   contenedor = `\n${' '.repeat(4)}${mostrar.bandera()}\n\n${contenido}`;
