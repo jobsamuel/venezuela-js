@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'strict mode';
+
 const venezuela = require('./index');
 const pkg = require('./package.json');
 const updateNotifier = require('update-notifier');
@@ -34,6 +36,71 @@ program.on('--help', () => {
 
   console.log(mensaje);
 });
+
+const mostrar = (function () {
+  return {
+    bandera,
+    entidad,
+    entidades,
+    listaDeMunicipios
+  };
+
+  function bandera() {
+    const amarillo = colors.yellow.bold('▓▒');
+    const azul = colors.blue.bold('▓▒');
+    const rojo = colors.red.bold('▓▒');
+    const bandera = `${amarillo}${azul}${rojo}`;
+
+    return bandera;
+  }
+
+  function entidad(datos) {
+    return Object.keys(datos).map(nombre => {
+      const titulo = nombre.replace('_', ' ').toUpperCase();
+      const contenido = typeof datos[nombre] === 'number' ? datos[nombre] : datos[nombre].toUpperCase();
+      const tituloConEstilo = colors.white.bold(titulo);
+      const contenidoConEstilo = colors.yellow.bold(contenido);
+
+      return `${tituloConEstilo}${' '.repeat(4)}${contenidoConEstilo}`;
+    }).join('\n');
+  };
+
+  function entidades(datos) {
+    return datos.map(dato => this.entidad(dato)).join('\n\n');
+  }
+
+  function listaDeMunicipios(datos) {
+    const titulo = `MUNICIPIOS DEL ESTADO ${datos.estado.toUpperCase()}`;
+    const tituloConEstilo = colors.white.bold(titulo);
+    const municipios = this.parrafo(datos.municipios);
+    const informacion = `${tituloConEstilo}\n\n${municipios}`;
+
+    return informacion;
+  }
+
+  function parrafo(palabras) {
+    const separador = colors.grey.bold('•');
+    const numeroDeGrupos = palabras.length / 3;
+    let grupos = [];
+    let parrafo;
+
+    for (let n = 0; n < numeroDeGrupos; n++) {
+      const grupo = palabras.slice(n*3, n*3+3);
+      const grupoConEstilo = grupo.map((palabra, indice) => {
+        const palabraAmarilla = colors.yellow.bold(palabra);
+
+        return indice === 0 ? palabraAmarilla : ` ${separador} ${palabraAmarilla}`;
+      });
+
+      grupos = [...grupos, grupoConEstilo];
+    }
+
+    parrafo = grupos.map(grupo => grupo.join())
+      .reduce((parrafo, oracion) => `${parrafo}\n  ${oracion}`);
+
+    return parrafo;
+  }
+})();
 
 (function consulta() {
   const consulta = program.args ? program.args[0] : undefined;
@@ -76,72 +143,16 @@ function mostrarResultado(resultado) {
   } else if (typeof resultado === 'string') {
     contenido = colors.white.bold(resultado);
   } else if (typeof resultado === 'object' && (esUnEstado || esUnMunicipio)) {
-    contenido = mostrarEntidad(resultado);
+    contenido = mostrar.entidad(resultado);
   } else if (typeof resultado === 'object' && Array.isArray(resultado.municipios)) {
-    contenido = mostrarListaDeMunicipios(resultado);
+    contenido = mostrar.listaDeMunicipios(resultado);
   } else if (Array.isArray(resultado)) {
-    contenido = mostrarEntidades(resultado);
+    contenido = mostrar.entidades(resultado);
   } else {
     contenido = colors.white.bold('Nombre inválido.');
   }
 
-  contenedor = `\n${' '.repeat(4)}${crearBandera()}\n\n${contenido}`;
+  contenedor = `\n${' '.repeat(4)}${mostrar.bandera()}\n\n${contenido}`;
 
   console.log(contenedor);
-}
-
-function mostrarEntidad(datos) {
-  return Object.keys(datos).map(nombre => {
-    const titulo = nombre.replace('_', ' ').toUpperCase();
-    const contenido = typeof datos[nombre] === 'number' ? datos[nombre] : datos[nombre].toUpperCase();
-    const tituloConEstilo = colors.white.bold(titulo);
-    const contenidoConEstilo = colors.yellow.bold(contenido);
-
-    return `${tituloConEstilo}${' '.repeat(4)}${contenidoConEstilo}`;
-  }).join('\n');
-};
-
-function mostrarEntidades(datos) {
-  return datos.map(dato => mostrarEntidad(dato)).join('\n\n');
-}
-
-function mostrarListaDeMunicipios(datos) {
-  const titulo = `MUNICIPIOS DEL ESTADO ${datos.estado.toUpperCase()}`;
-  const tituloConEstilo = colors.white.bold(titulo);
-  const municipios = crearParrafo(datos.municipios);
-  const informacion = `${tituloConEstilo}\n\n${municipios}`;
-
-  return informacion;
-}
-
-function crearBandera() {
-  const amarillo = colors.yellow.bold('▓▒');
-  const azul = colors.blue.bold('▓▒');
-  const rojo = colors.red.bold('▓▒');
-  const bandera = `${amarillo}${azul}${rojo}`;
-
-  return bandera;
-}
-
-function crearParrafo(palabras) {
-  const separador = colors.grey.bold('•');
-  const numeroDeGrupos = palabras.length / 3;
-  let grupos = [];
-  let parrafo;
-
-  for (let n = 0; n < numeroDeGrupos; n++) {
-    const grupo = palabras.slice(n*3, n*3+3);
-    const grupoConEstilo = grupo.map((palabra, indice) => {
-      const palabraAmarilla = colors.yellow.bold(palabra);
-
-      return indice === 0 ? palabraAmarilla : ` ${separador} ${palabraAmarilla}`;
-    });
-
-    grupos = [...grupos, grupoConEstilo];
-  }
-
-  parrafo = grupos.map(grupo => grupo.join())
-    .reduce((parrafo, oracion) => `${parrafo}\n  ${oracion}`);
-
-  return parrafo;
 }
