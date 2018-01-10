@@ -19,8 +19,8 @@ function venezuela() {
 
 // Quita acentos de las vocales.
 function formato(nombre) {
-  const x = 'áéíóú';
-  const y = 'aeiou';
+  const x = 'aeiou';
+  const y = 'áéíóú';
 
   return nombre.toLowerCase().replace(/á|é|í|ó|ú/g, letra => x[y.indexOf(letra)]);
 }
