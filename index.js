@@ -36,7 +36,9 @@ function aleatorio(tipo) {
   if (tipo === 'municipio') {
     return {
       municipio: municipio.municipio,
-      estado: estado.estado
+      capital: municipio.capital,
+      estado: estado.estado,
+      parroquias: parroquias.length
     };
   }
 
