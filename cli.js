@@ -57,11 +57,11 @@ const crear = (function () {
   function entidad(datos) {
     return Object.keys(datos).map(nombre => {
       const titulo = nombre.replace('_', ' ').toUpperCase();
-      const contenido = typeof datos[nombre] === 'number' ? datos[nombre] : datos[nombre].toUpperCase();
+      const contenido = String(datos[nombre]).toUpperCase();
       const tituloConEstilo = colors.white.bold(titulo);
       const contenidoConEstilo = colors.yellow.bold(contenido);
 
-      return `${tituloConEstilo}${' '.repeat(4)}${contenidoConEstilo}`;
+      return `${tituloConEstilo} ${contenidoConEstilo}`;
     }).join('\n');
   };
 
@@ -72,10 +72,9 @@ const crear = (function () {
   function listaDeMunicipios(datos) {
     const titulo = `MUNICIPIOS DEL ESTADO ${datos.estado.toUpperCase()}`;
     const tituloConEstilo = colors.white.bold(titulo);
-    const municipios = parrafo(datos.municipios);
-    const informacion = `${tituloConEstilo}\n\n${municipios}`;
+    const contenido = parrafo(datos.municipios);
 
-    return informacion;
+    return `${tituloConEstilo}\n\n${contenido}`;
   }
 
   function parrafo(palabras) {
