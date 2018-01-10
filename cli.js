@@ -37,7 +37,7 @@ program.on('--help', () => {
   console.log(mensaje);
 });
 
-const mostrar = (function () {
+const crear = (function () {
   return {
     bandera,
     entidad,
@@ -102,53 +102,56 @@ const mostrar = (function () {
   }
 })();
 
-(function consulta () {
-  const consulta = program.args ? program.args[0] : undefined;
+const mostrar = (function () {
+  return {
+    resultado: procesar
+  };
+
+  function procesar(datos) {
+    let contenido;
+
+    if (!datos) {
+      contenido = colors.white.bold('Nombre inválido.');
+    } else if (typeof datos === 'string') {
+      contenido = colors.white.bold(datos);
+    } else if (Array.isArray(datos)) {
+      contenido = crear.entidades(datos);
+    } else if (Array.isArray(datos.municipios)) {
+      contenido = crear.listaDeMunicipios(datos);
+    } else {
+      contenido = crear.entidad(datos);
+    }
+
+    console.log(`\n${' '.repeat(4)}${crear.bandera()}\n\n${contenido}`);
+  }
+})();
+
+(function consultar() {
+  const nombre = program.args ? program.args[0] : undefined;
   let necesitaAyuda = false;
-  let resultado;
+  let datos;
 
-  if (!consulta && program.capital) {
-    resultado = venezuela.capital;
+  if (!nombre && program.capital) {
+    datos = venezuela.capital;
   } else if (program.capital) {
-    const data = (venezuela.estado(consulta) ||
-      venezuela.municipio(consulta) ||
-        venezuela.parroquia(consulta));
+    const data = (venezuela.estado(nombre) ||
+      venezuela.municipio(nombre) ||
+        venezuela.parroquia(nombre));
 
-    resultado = data ? data.capital : undefined;
+    datos = data ? data.capital : undefined;
   } else if (program.municipios) {
-    resultado = venezuela.estado(consulta, {municipios: true});
+    datos = venezuela.estado(nombre, {municipios: true});
   } else if (program.municipio) {
-    resultado = venezuela.municipio(consulta);
+    datos = venezuela.municipio(nombre);
   } else if (program.parroquia) {
-    resultado = venezuela.parroquia(consulta);
+    datos = venezuela.parroquia(nombre);
   } else if (program.ayuda || process.argv.length === 2) {
     necesitaAyuda = true;
   } else if (process.argv.length === 3) {
-    resultado = (venezuela.estado(consulta) ||
-      venezuela.municipio(consulta) ||
-        venezuela.parroquia(consulta));
+    datos = (venezuela.estado(nombre) ||
+      venezuela.municipio(nombre) ||
+        venezuela.parroquia(nombre));
   }
 
-  necesitaAyuda ? program.help() : mostrarResultado(resultado);
+  necesitaAyuda ? program.help() : mostrar.resultado(datos);
 })();
-
-function mostrarResultado(resultado) {
-  let contenedor;
-  let contenido;
-
-  if (!resultado) {
-    contenido = colors.white.bold('Nombre inválido.');
-  } else if (typeof resultado === 'string') {
-    contenido = colors.white.bold(resultado);
-  } else if (Array.isArray(resultado)) {
-    contenido = mostrar.entidades(resultado);
-  } else if (Array.isArray(resultado.municipios)) {
-    contenido = mostrar.listaDeMunicipios(resultado);
-  } else {
-    contenido = mostrar.entidad(resultado);
-  }
-
-  contenedor = `\n${' '.repeat(4)}${mostrar.bandera()}\n\n${contenido}`;
-
-  console.log(contenedor);
-}
