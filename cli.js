@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-'strict mode';
+'use strict';
 
 const venezuela = require('./index');
 const pkg = require('./package.json');
