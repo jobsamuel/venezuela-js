@@ -116,7 +116,14 @@ const mostrar = (function () {
       contenido = crear.entidad(datos);
     }
 
-    console.log(`\n${' '.repeat(4)}${crear.bandera()}\n\n${contenido}`);
+    contenido = margen(`\n${crear.bandera()}\n\n${contenido}`);
+
+    console.log(contenido);
+  }
+
+  function margen(texto) {
+    return texto.split('\n')
+      .map(oracion => `${' '.repeat(4)}${oracion}`).join('\n');
   }
 })();
 
