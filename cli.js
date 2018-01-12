@@ -6,14 +6,14 @@ const venezuela = require('./index');
 const pkg = require('./package.json');
 const updateNotifier = require('update-notifier');
 const program = require('commander');
-const colors = require('colors');
+const chalk = require('chalk');
 
 updateNotifier({pkg: pkg}).notify();
 
 program
   .version(pkg.version)
   .usage('<estado|municipio|parroquia> [opciones]')
-  .description(colors.yellow('Muestra información sobre el territorio Venezolano.'.bold))
+  .description(chalk.hex('#FFEB3B').bold('Muestra información sobre el territorio Venezolano.'))
   .option('-a, --ayuda', 'muestra cómo utilizar venezuela-js')
   .option('-c, --capital nombre', 'muestra la capital de la entidad')
   .option('-m, --municipio nombre', 'muestra la información de un municipio')
@@ -46,9 +46,9 @@ const crear = (function () {
   };
 
   function bandera() {
-    const amarillo = colors.yellow.bold('▓▒');
-    const azul = colors.blue.bold('▓▒');
-    const rojo = colors.red.bold('▓▒');
+    const amarillo = chalk.hex('#FFEB3B')('▓▒');
+    const azul = chalk.hex('#0D47A1')('▓▒');
+    const rojo = chalk.hex('#B71C1C')('▓▒');
     const bandera = `${amarillo}${azul}${rojo}`;
 
     return bandera;
@@ -58,8 +58,8 @@ const crear = (function () {
     return Object.keys(datos).map(nombre => {
       const titulo = nombre.replace('_', ' ').toUpperCase();
       const contenido = String(datos[nombre]).toUpperCase();
-      const tituloConEstilo = colors.white.bold(titulo);
-      const contenidoConEstilo = colors.yellow.bold(contenido);
+      const tituloConEstilo = chalk.hex('#FAFAFA').bold(titulo);
+      const contenidoConEstilo = chalk.hex('#FFEB3B').bold(contenido);
 
       return `${tituloConEstilo} ${contenidoConEstilo}`;
     }).join('\n');
@@ -71,7 +71,7 @@ const crear = (function () {
 
   function listaDeMunicipios(datos) {
     const titulo = `MUNICIPIOS DEL ESTADO ${datos.estado.toUpperCase()}`;
-    const tituloConEstilo = colors.white.bold(titulo);
+    const tituloConEstilo = chalk.hex('#FAFAFA').bold(titulo);
     const contenido = parrafo(datos.municipios);
 
     return `${tituloConEstilo}\n\n${contenido}`;
@@ -92,7 +92,7 @@ const crear = (function () {
     parrafo = grupos.map(grupo => grupo.join(''))
       .reduce((parrafo, oracion) => `${parrafo}\n${oracion}`);
 
-    return colors.yellow.bold(parrafo);
+    return chalk.hex('#FFEB3B').bold(parrafo);
   }
 })();
 
@@ -105,9 +105,9 @@ const mostrar = (function () {
     let contenido;
 
     if (!datos) {
-      contenido = colors.white.bold('Nombre inválido.');
+      contenido = chalk.hex('#FAFAFA').bold('Nombre inválido.');
     } else if (typeof datos === 'string') {
-      contenido = colors.white.bold(datos);
+      contenido = chalk.hex('#FAFAFA').bold(datos);
     } else if (Array.isArray(datos)) {
       contenido = crear.entidades(datos);
     } else if (Array.isArray(datos.municipios)) {

@@ -4,7 +4,7 @@
   "description": "Muestra información sobre el territorio Venezolano en tu CLI",
   "main": "index.js",
   "dependencies": {
-    "colors": "^1.1.2",
+    "chalk": "^2.3.0",
     "commander": "^2.13.0",
     "update-notifier": "^0.6.3"
   },
