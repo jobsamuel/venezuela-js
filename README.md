@@ -2,7 +2,7 @@
     <img alt="venezuela-js" src="http://i.imgur.com/9CNl0Af.png" width="auto">
 </p>
 <p align="center" style="color:#707070;">
-  Muestra la organización territorial de Venezuela.
+  Muestra información sobre el territorio Venezolano.
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/venezuela"><img alt="version" src="https://img.shields.io/npm/v/venezuela.svg?style=flat-square"></a>
@@ -20,10 +20,18 @@ $ npm install -g venezuela
 $ venezuela --ayuda
 ```
 
+# ejemplo
+
+```bash
+$ venezuela Zulia
+```
+
+![Estado](https://i.imgur.com/96YB8rM.png)
+
 # documentación
 
 [Documentación del API](DOCUMENTACION.md)
 
 # licencia
 
-Licencia [MIT](http://opensource.org/licenses/MIT) :copyright: 2017 Jobsamuel Núñez
+Licencia [MIT](http://opensource.org/licenses/MIT) :copyright: 2018 Jobsamuel Núñez

@@ -9,7 +9,7 @@
 
 # ¿por qué venezuela-js?
 
-Nunca fui bueno para aprenderme todos los Estados y Capitales de mi país, así que, como me encanta [Node](https://nodejs.org/en/) y las cosas simples, decidí hacer un módulo que permitiera obtener la información de un Estado, Municipio o Parroquia de Venezuela, con tan sólo escribir su nombre en la terminal o un script. 
+Nunca fui bueno para aprenderme todos los Estados y Capitales de mi país, así que, como me encanta [Node](https://nodejs.org/en/) y las cosas simples, decidí hacer un módulo que permitiera obtener la información de un Estado, Municipio o Parroquia de Venezuela con tan sólo escribir su nombre en la terminal o un script.
 
 ¿Te gustaría utilizarlo?
 
@@ -38,7 +38,7 @@ También puedes instalarlo localmente para sólo utilizarlo en tu proyecto.
 
 
 ```bash
-$ npm install venezuela
+$ npm install venezuela --save
 ```
 
 # terminal
@@ -49,7 +49,7 @@ Luego de haber instalado **venezuela-js** globalmente, sólo tienes que escribir
 $ venezuela Zulia
 ```
 
-![Estado](http://i.imgur.com/LciVjJf.png)
+![Estado](https://i.imgur.com/96YB8rM.png)
 
 #### uso
 
@@ -59,7 +59,7 @@ $ venezuela <estado|municipio|parroquia> [opciones]
 
 #### opciones
 
-Si deseas un **resultado específico**, por ejemplo, obtener información sobre la parroquia *Libertador* en vez del municipio que lleva el mismo nombre, puedes utilizar alguna de estas opciones.
+Si deseas un **resultado específico**, por ejemplo, obtener información sobre la parroquia *Libertador* en vez del municipio que lleva el mismo nombre, puedes utilizar alguna de estas opciones:
 
 ```bash
 $  -V, --version               # Muestra la versión del módulo
@@ -87,44 +87,44 @@ A continuación se presentan las propiedades y métodos del API de **venezuela-j
 
 ### venezuela.pais
 
-Retorna **todos** los estados, municipios y parroquias de Venezuela.
+Retorna un *Objeto* con **todos** los estados, municipios y parroquias de Venezuela.
 
 ### venezuela.capital
 
-Retorna los detalles de la capital de Venezuela.
+Retorna un *Objeto* con los detalles de la capital de Venezuela.
 
 ### venezuela.estados
 
-Retorna el número de estados que posee el territorio Venezolano.
+Retorna el *Número* de estados que posee el territorio Venezolano.
 
 ### venezuela.municipios
 
-Retorna el número de municipios que posee el territorio Venezolano.
+Retorna el *Número* de municipios que posee el territorio Venezolano.
 
 ### venezuela.parroquias
 
-Retorna el número de parroquias que posee el territorio Venezolano.
+Retorna el *Número* de parroquias que posee el territorio Venezolano.
 
 ## métodos
 
 ### venezuela.estado(nombre, opciones)
 
-Retorna un *Objeto* los detalles de un estado Venezolano.
+Retorna un *Objeto* con los detalles de un estado Venezolano.
 
 #### argumentos
 
-`nombre` Nombre del estado Venezolano deseado. Debe ser un *string*.
+`nombre` Nombre del estado Venezolano deseado. Debe ser un *String*.
 
-`opciones` Configuración del resultado. Debe ser un *object*.
+`opciones` Configuración del resultado. Debe ser un *Objeto*.
 
-  - `municipios` Retorna un Array con todos los municipios de un estado. Debe ser un *boolean*. Por defecto, es `false`.
+  - `municipios` Retorna un *Array* con todos los municipios de un estado. Debe ser un *Boolean*. Por defecto, es `false`.
 
 #### ejemplo
 
 Al hacer esto:
 
 ```js
-var z = venezuela.estado('Zulia');
+const z = venezuela.estado('Zulia');
 console.log(z);
 ```
 El resultado será:
@@ -141,7 +141,7 @@ El resultado será:
 Y si suministras el parámetro `opciones`:
 
 ```js
-var z = venezuela.estado('Zulia', { municipios: true });
+const z = venezuela.estado('Zulia', {municipios: true});
 console.log(z);
 ```
 
@@ -178,23 +178,44 @@ Entonces el resultado será:
 }
 ```
 
-### venezuela.municipio(nombre)
+### venezuela.municipio(nombre, opciones)
 
-Retorna un *Objeto* los detalles de un municipio Venezolano.
+Retorna un *Objeto* con los detalles de un municipio Venezolano.
 
 #### argumentos
 
 `nombre` Nombre *opcional* del municipio Venezolano deseado. Debe ser un *string*. De no suministrarse ningún nombre, el método retorna un municipio aleatorio.
+
+`opciones` Configuración del resultado. Debe ser un *Objeto*.
+
+  - `parroquias` Retorna un *Array* con todas las parroquias de un municipio. Debe ser un *Boolean*. Por defecto, es `false`.
 
 #### ejemplo
 
 Al hacer esto:
 
 ```js
-var l = venezuela.municipio('Libertador');
+const l = venezuela.municipio('Libertador');
 console.log(l);
 ```
 El resultado será:
+```json
+{
+  "municipio": "Libertador",
+  "capital": "Caracas",
+  "estado": "Distrito Capital",
+  "parroquias": 22
+}
+```
+
+Y si suministras el parámetro `opciones`:
+
+```js
+const l = venezuela.municipio('Libertador', {parroquias: true});
+console.log(l);
+```
+Entonces el resultado será:
+
 ```json
 {
   "municipio": "Libertador",
@@ -229,18 +250,18 @@ El resultado será:
 
 ### venezuela.parroquia(nombre)
 
-Retorna un *Arreglo* con los detalles de una o varias parroquias Venezolanas; si existe más de una parroquia con el mismo nombre, retorna todas las coincidencias.
+Retorna un *Array* con los detalles de una o varias parroquias Venezolanas; si existe más de una parroquia con el mismo nombre, retorna todas las coincidencias.
 
 #### argumentos
 
-`nombre` Nombre *opcional* de la parroquia Venezolana deseada. Debe ser un *string*. De no suministrarse ningún nombre, el método retorna una parroquia aleatoria.
+`nombre` Nombre *opcional* de la parroquia Venezolana deseada. Debe ser un *String*. De no suministrarse ningún nombre, el método retorna una parroquia aleatoria.
 
 #### ejemplo
 
 Al hacer esto:
 
 ```js
-var p = venezuela.parroquia('San Juan');
+const p = venezuela.parroquia('San Juan');
 console.log(p);
 ```
 El resultado será:
@@ -273,4 +294,4 @@ El resultado será:
 
 # licencia
 
-Licencia [MIT](http://opensource.org/licenses/MIT) :copyright: 2016 Jobsamuel Núñez
+Licencia [MIT](http://opensource.org/licenses/MIT) :copyright: 2018 Jobsamuel Núñez

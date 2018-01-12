@@ -1,136 +1,158 @@
 #!/usr/bin/env node
 
-var vzla = require('./index');
-var pkg = require('./package.json');
-var updateNotifier = require('update-notifier');
-var program = require('commander');
-var colors = require('colors');
-var bandera = '    ' +
-    colors.yellow.bold('• ') +
-    colors.blue.bold('• ') +
-    colors.red.bold('• ');
-var respuesta;
-var t1;
-var t2;
-var t3;
-var t4;
-var t5;
+'use strict';
+
+const venezuela = require('./index');
+const pkg = require('./package.json');
+const updateNotifier = require('update-notifier');
+const program = require('commander');
+const chalk = require('chalk');
 
 updateNotifier({pkg: pkg}).notify();
 
 program
-    .version(pkg.version)
-    .usage('<estado|municipio|parroquia> [opciones]')
-    .description(colors.yellow('Muestra información sobre el territorio Venezolano.'.bold))
-    .option('-a, --ayuda', 'muestra cómo utilizar venezuela-js')
-    .option('-c, --capital nombre', 'muestra la capital de la entidad')
-    .option('-m, --municipio nombre', 'muestra la información de un municipio')
-    .option('-p, --parroquia nombre', 'muestra la información de una parroquia')
-    .option('-M, --municipios nombre', 'muestra todos los municipios de un estado')
-    .parse(process.argv);
+  .version(pkg.version)
+  .usage('<estado|municipio|parroquia> [opciones]')
+  .description(chalk.hex('#FFEB3B').bold('Muestra información sobre el territorio Venezolano.'))
+  .option('-a, --ayuda', 'muestra cómo utilizar venezuela-js')
+  .option('-c, --capital nombre', 'muestra la capital de la entidad')
+  .option('-m, --municipio nombre', 'muestra la información de un municipio')
+  .option('-p, --parroquia nombre', 'muestra la información de una parroquia')
+  .option('-M, --municipios nombre', 'muestra todos los municipios de un estado')
+  .parse(process.argv);
 
-program.on('--help', function (){
-  console.log('  Ejemplos:');
-  console.log('');
-  console.log('    $ venezuela "Nueva Esparta"');
-  console.log('    $ venezuela Zulia');
-  console.log('    $ venezuela --capital');
-  console.log('    $ venezuela --municipio Libertador');
-  console.log('    $ venezuela --parroquia "San Juan"');
-  console.log('    $ venezuela Bolívar -M');
-  console.log('    $ venezuela Falcón -c');
-  console.log('');
+program.on('--help', () => {
+  const mensaje = `
+  Ejemplos:
+
+    $ venezuela --capital
+    $ venezuela --municipio "San Cristóbal"
+    $ venezuela --parroquia Libertad
+    $ venezuela "Nueva Esparta"
+    $ venezuela Mérida
+    $ venezuela Lara -c
+    $ venezuela Zulia -M
+  `;
+
+  console.log(mensaje);
 });
 
-function parrafo (palabras) {
-    var d = colors.grey.bold(' • ');
-    var n = palabras.length / 3;
-    var m = 0;
-    for (var i = 0; i < n; i++) {
-        var p = [];
-        var l = 0;
-        for (var j = 0; j < 3; j++) {
-            if (palabras[m + l]) {
-                p[j] = colors.yellow.bold(palabras[m + l]);
-                if (l <= 1) {
-                    p[j] += d;
-                }
-            } else {
-                p[j] = '';
-            }
-            l += 1;
-        }
-        console.log('    ' + p[0] + p[1] + p[2]);
-        m += 3;
-    }
-}
+const crear = (function () {
+  return {
+    bandera,
+    entidad,
+    entidades,
+    listaDeMunicipios
+  };
 
-if ((!program.args.length && program.capital) || program.args[0] === 'caracas') {
-    respuesta = JSON.stringify(vzla.capital, null, 4);
-} else if (process.argv.length <= 2 || program.ayuda) {
-    return program.help();
-} else if (program.capital) {
-    if (vzla.estado(program.args[0]).capital) {
-        respuesta = '    ' + vzla.estado(program.args[0]).capital;
-    } else if (vzla.municipio(program.args[0]).capital) {
-        respuesta = '    ' + vzla.municipio(program.args[0]).capital;
-    } else if (vzla.parroquia(program.args[0]).capital) {
-        respuesta = '    ' + vzla.parroquia(program.args[0]).capital;
-    } else {
-        respuesta = '    ' + program.args[0] + ' es un nombre inválido.';
-    }
-} else if (program.municipio) {
-    respuesta = JSON.stringify(vzla.municipio(program.args[0]), null, 4);
-} else if (program.parroquia) {
-    respuesta = JSON.stringify(vzla.parroquia(program.args[0]), null, 4);
-} else if (program.municipios && process.argv.length > 3) {
-    if (!/Tal[ ]vez/.test(vzla.estado(program.args[0]))) {
-        respuesta = vzla.estado(program.args[0], { municipios: true });
-        t1 = respuesta.estado.toUpperCase();
-        t2 = colors.white.bold('    MUNICIPIOS DEL ESTADO ' + t1);
-        t5 = colors.grey.bold('•');
-        console.log('');
-        console.log(bandera);
-        console.log('');
-        console.log(t2);
-        console.log('');
-        parrafo(respuesta.municipios);
-        console.log('');
-        return;
-    } else {
-        respuesta = '    ' + program.args[0] + ' es un nombre inválido.';
-    }
-} else if (program.args[0]) {
-    if (!/Tal[ ]vez/.test(vzla.estado(program.args[0]))) {
-        respuesta = vzla.estado(program.args[0])
-        t1 = colors.white.bold('     ISO 31662    ');
-        t2 = colors.white.bold('        ESTADO    ');
-        t3 = colors.white.bold('       CAPITAL    ');
-        t4 = colors.white.bold('    MUNICIPIOS    ');
-        t5 = colors.white.bold('    PARROQUIAS    ');
-        console.log('');
-        console.log(bandera);
-        console.log('');
-        console.log(t1 + colors.yellow.bold(respuesta.iso_31662));
-        console.log(t2 + colors.yellow.bold(respuesta.estado));
-        console.log(t3 + colors.yellow.bold(respuesta.capital));
-        console.log(t4 + colors.yellow.bold(respuesta.municipios));
-        console.log(t5 + colors.yellow.bold(respuesta.parroquias));
-        console.log('');
-        return;
-    } else if (!/Tal[ ]vez/.test(vzla.municipio(program.args[0]))) {
-        respuesta = JSON.stringify(vzla.municipio(program.args[0]), null, 4);
-    } else if (!/Tal[ ]vez/.test(vzla.parroquia(program.args[0]))) {
-        respuesta = JSON.stringify(vzla.parroquia(program.args[0]), null, 4);
-    } else {
-        respuesta = '    ' + program.args[0] + ' es un nombre inválido.';
-    }
-} else {
-    respuesta = '    Debes ingresar un nombre.';
-}
+  function bandera() {
+    const amarillo = chalk.hex('#FFEB3B')('▓▒');
+    const azul = chalk.hex('#0D47A1')('▓▒');
+    const rojo = chalk.hex('#B71C1C')('▓▒');
+    const bandera = `${amarillo}${azul}${rojo}`;
 
-console.log('');
-console.log(bandera);
-console.log('');
-console.log(colors.white.bold(respuesta));
-console.log('');
+    return bandera;
+  }
+
+  function entidad(datos) {
+    return Object.keys(datos).map(nombre => {
+      const titulo = nombre.replace('_', ' ').toUpperCase();
+      const contenido = String(datos[nombre]).toUpperCase();
+      const tituloConEstilo = chalk.hex('#FAFAFA').bold(titulo);
+      const contenidoConEstilo = chalk.hex('#FFEB3B').bold(contenido);
+
+      return `${tituloConEstilo} ${contenidoConEstilo}`;
+    }).join('\n');
+  };
+
+  function entidades(datos) {
+    return datos.map(dato => entidad(dato)).join('\n\n');
+  }
+
+  function listaDeMunicipios(datos) {
+    const titulo = `MUNICIPIOS DEL ESTADO ${datos.estado.toUpperCase()}`;
+    const tituloConEstilo = chalk.hex('#FAFAFA').bold(titulo);
+    const contenido = parrafo(datos.municipios);
+
+    return `${tituloConEstilo}\n\n${contenido}`;
+  }
+
+  function parrafo(palabras) {
+    const numeroDeGrupos = palabras.length / 3;
+    let grupos = [];
+    let parrafo;
+
+    for (let n = 0; n < numeroDeGrupos; n++) {
+      const grupo = palabras.slice(n*3, n*3+3)
+        .map((palabra, indice) => indice === 0 ? palabra : ` • ${palabra}`);
+
+      grupos = [...grupos, grupo];
+    }
+
+    parrafo = grupos.map(grupo => grupo.join(''))
+      .reduce((parrafo, oracion) => `${parrafo}\n${oracion}`);
+
+    return chalk.hex('#FFEB3B').bold(parrafo);
+  }
+})();
+
+const mostrar = (function () {
+  return {
+    resultado: procesar
+  };
+
+  function procesar(datos) {
+    let contenido;
+
+    if (!datos) {
+      contenido = chalk.hex('#FAFAFA').bold('Nombre inválido.');
+    } else if (typeof datos === 'string') {
+      contenido = chalk.hex('#FAFAFA').bold(datos);
+    } else if (Array.isArray(datos)) {
+      contenido = crear.entidades(datos);
+    } else if (Array.isArray(datos.municipios)) {
+      contenido = crear.listaDeMunicipios(datos);
+    } else {
+      contenido = crear.entidad(datos);
+    }
+
+    contenido = margen(`\n${crear.bandera()}\n\n${contenido}`);
+
+    console.log(contenido);
+  }
+
+  function margen(texto) {
+    return texto.split('\n')
+      .map(oracion => `${' '.repeat(4)}${oracion}`).join('\n');
+  }
+})();
+
+(function consultar() {
+  const nombre = program.args ? program.args[0] : undefined;
+  let necesitaAyuda = false;
+  let datos;
+
+  if (!nombre && program.capital) {
+    datos = venezuela.capital;
+  } else if (program.capital) {
+    const data = (venezuela.estado(nombre) ||
+      venezuela.municipio(nombre) ||
+        venezuela.parroquia(nombre));
+
+    datos = data ? data.capital : undefined;
+  } else if (program.municipios) {
+    datos = venezuela.estado(nombre, {municipios: true});
+  } else if (program.municipio) {
+    datos = venezuela.municipio(nombre);
+  } else if (program.parroquia) {
+    datos = venezuela.parroquia(nombre);
+  } else if (program.ayuda || process.argv.length === 2) {
+    necesitaAyuda = true;
+  } else if (process.argv.length === 3) {
+    datos = (venezuela.estado(nombre) ||
+      venezuela.municipio(nombre) ||
+        venezuela.parroquia(nombre));
+  }
+
+  necesitaAyuda ? program.help() : mostrar.resultado(datos);
+})();
