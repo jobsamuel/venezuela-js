@@ -20,6 +20,14 @@ $ npm install -g venezuela
 $ venezuela --ayuda
 ```
 
+# ejemplo
+
+```bash
+$ venezuela Zulia
+```
+
+![Estado](https://i.imgur.com/96YB8rM.png)
+
 # documentación
 
 [Documentación del API](DOCUMENTACION.md)
