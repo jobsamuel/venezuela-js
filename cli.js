@@ -25,13 +25,13 @@ program.on('--help', () => {
   const mensaje = `
   Ejemplos:
 
-    $ venezuela "Nueva Esparta"
-    $ venezuela Zulia
     $ venezuela --capital
-    $ venezuela --municipio Libertador
-    $ venezuela --parroquia "San Juan"
-    $ venezuela Bolívar -M
-    $ venezuela Falcón -c
+    $ venezuela --municipio "San Cristóbal"
+    $ venezuela --parroquia Libertad
+    $ venezuela "Nueva Esparta"
+    $ venezuela Mérida
+    $ venezuela Lara -c
+    $ venezuela Zulia -M
   `;
 
   console.log(mensaje);
